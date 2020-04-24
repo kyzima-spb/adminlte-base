@@ -1,0 +1,37 @@
+{% block document -%}
+<!DOCTYPE html>
+<html{% block html_attributes %} lang="en"{% endblock %}>
+<head>
+{%- block head %}
+  {%- block meta %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+  {% endblock -%}
+  <title>{% block title %}{% block page_title %}{% endblock %} | {% block site_title %}{% endblock %}{{ adminlte.config('ADMINLTE_SITE_TITLE') }}{% endblock %}</title>
+  {%- block styles %}
+    <link type="image/x-icon" rel="shortcut icon" href="{{ adminlte.static('favicon.ico') }}">
+    <link rel="stylesheet" href="{{ adminlte.static('plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ adminlte.static('dist/css/adminlte.min.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  {% endblock -%}
+  {%- block styles_inline %}{% endblock -%}
+  {%- block javascript_head %}{% endblock -%}
+{% endblock -%}
+</head>
+
+<body{% block body_attributes %}{% endblock %}>
+{%- block body %}
+  {%- block main %}{% endblock -%}
+  {%- block javascript %}
+    <script src="{{ adminlte.static('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ adminlte.static('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ adminlte.static('dist/js/adminlte.min.js') }}"></script>
+  {% endblock -%}
+  {%- block javascript_inline %}{% endblock -%}
+{% endblock -%}
+</body>
+</html>
+{%- endblock %}
