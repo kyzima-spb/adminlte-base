@@ -9,17 +9,17 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="{% block meta_description %}{% endblock %}">
     <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
-  {% endblock -%}
-  <title>{% block title %}{% block page_title %}{% endblock %} | {% block site_title %}{% endblock %}{{ adminlte.config('ADMINLTE_SITE_TITLE') }}{% endblock %}</title>
+  {% endblock meta -%}
+  <title>{% block title %}{% block page_title %}{% endblock page_title %} | {% block site_title %}{{ adminlte.config('ADMINLTE_SITE_TITLE') }}{% endblock site_title %}{% endblock title %}</title>
   {%- block styles %}
     <link type="image/x-icon" rel="shortcut icon" href="{{ adminlte.static('favicon.ico') }}">
     <link rel="stylesheet" href="{{ adminlte.static('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ adminlte.static('dist/css/adminlte.min.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  {% endblock -%}
-  {%- block styles_inline %}{% endblock -%}
-  {%- block javascript_head %}{% endblock -%}
-{% endblock -%}
+  {% endblock styles -%}
+  {%- block styles_inline %}{% endblock styles_inline -%}
+  {%- block javascript_head %}{% endblock javascript_head -%}
+{% endblock head -%}
 </head>
 
 <body{% block body_attributes %}{% endblock %}>

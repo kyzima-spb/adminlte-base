@@ -1,0 +1,27 @@
+{% macro flash_messages(messages) %}
+  {% if messages %}
+    <div class="flash-messages-box">
+      {% for m in messages %}
+        <div class="alert alert-{{ m.level }} alert-dismissible {{ m.styles }}">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <h5><i class="icon {{ m.icon }}"></i> {{ m.title }}</h5>
+          {{ m.text }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro user_panel(user, profile_url) %}
+  {% if user.is_authenticated %}
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="{{ user.email | gravatar }}" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="{{ profile_url }}" class="d-block">{{ user }}</a>
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}
