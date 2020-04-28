@@ -8,6 +8,7 @@ DEFAULT_SETTINGS = {
     'ADMINLTE_REGISTRATION_ENDPOINT': 'auth.registration',
     'ADMINLTE_LOGIN_ENDPOINT': 'auth.login',
     'ADMINLTE_LOGOUT_ENDPOINT': 'auth.logout',
+    'ADMINLTE_REMEMBER_ME': True,
 
     'ADMINLTE_PROFILE_ENDPOINT': 'user.profile',
     'ADMINLTE_PASSWORD_RESET': True,
