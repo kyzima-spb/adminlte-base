@@ -1,0 +1,2 @@
+recursive-include adminlte_base/static *
+recursive-include adminlte_base/templates *
