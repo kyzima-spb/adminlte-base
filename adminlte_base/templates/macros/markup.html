@@ -13,8 +13,8 @@
 {% endmacro %}
 
 
-{% macro user_panel(user, profile_url) %}
-  {% if user.is_authenticated %}
+{%- macro user_sidebar_panel(user, profile_url) -%}
+  {%- if not adminlte.config('ADMINLTE_LEGACY_USER_MENU') and user.is_authenticated -%}
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img src="{{ user.email | gravatar }}" class="img-circle elevation-2" alt="User Image">
@@ -23,5 +23,102 @@
         <a href="{{ profile_url }}" class="d-block">{{ user }}</a>
       </div>
     </div>
-  {% endif %}
-{% endmacro %}
+  {%- endif -%}
+{%- endmacro -%}
+
+
+{% macro legacy_user_menu(user, profile_url) -%}
+  {%- if user.is_authenticated %}
+    {%- if adminlte.config('ADMINLTE_LEGACY_USER_MENU') %}
+      <li class="nav-item dropdown user-menu">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+          <img src="{{ user.email | gravatar }}" class="user-image img-circle elevation-2" alt="User Image">
+          <span class="d-none d-md-inline">{{ user }}</span>
+        </a>
+        {%- include 'adminlte_full/includes/legacy_user_dropdown.html' %}
+      </li>
+    {%- else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ adminlte.url(adminlte.config('ADMINLTE_LOGOUT_ENDPOINT')) }}">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </li>
+    {% endif -%}
+  {% endif -%}
+{%- endmacro %}
+
+
+{% macro messages_menu(messages) -%}
+  <li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+      <i class="far fa-comments"></i>
+      <span class="badge badge-danger navbar-badge">{{ messages.total }}</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+      {% for m in messages -%}
+        <a href="{{ m.url }}" class="dropdown-item">
+          <div class="media">
+            <img src="{{ m.sender.email | gravatar }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+            <div class="media-body">
+              <h3 class="dropdown-item-title">
+                {{ m.sender }}
+                <span class="float-right text-sm text-{{ m.color }}"><i class="{{ m.icon }}"></i></span>
+              </h3>
+              <p class="text-sm">{{ m.subject }}</p>
+              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{ m.sent_at | human_date }}</p>
+            </div>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+      {%- endfor %}
+      <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+    </div>
+  </li>
+{%- endmacro %}
+
+
+{% macro notifications_menu(notifications) -%}
+  <li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+      <i class="far fa-bell"></i>
+      <span class="badge badge-warning navbar-badge">{{ notifications.total }}</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+      <span class="dropdown-item dropdown-header">15 Notifications</span>
+      <div class="dropdown-divider"></div>
+      {% for notice in notifications -%}
+        <a href="{{ notice.url }}" class="dropdown-item">
+          <i class="{{ notice.icon }} mr-2 text-{{ notice.color }}"></i> {{ notice.text }}
+          <span class="float-right text-muted text-sm">{{ notice.sent_at | human_date }}</span>
+        </a>
+        <div class="dropdown-divider"></div>
+      {%- endfor %}
+      <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+    </div>
+  </li>
+{%- endmacro %}
+
+
+{% macro tasks_menu(tasks) -%}
+  <li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+      <i class="far fa-flag"></i>
+      <span class="badge badge-success navbar-badge">{{ tasks.total }}</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+      {% for task in tasks -%}
+        <a href="{{ task.url }}" class="dropdown-item">
+          <div class="progress-group">
+            {{ task.title }}
+            <span class="float-right"><b>{{ task.progress }}</b>/100</span>
+            <div class="progress progress-sm">
+              <div class="progress-bar bg-{{ task.color }}" style="width: {{ task.progress }}%"></div>
+            </div>
+          </div>
+        </a>
+        <div class="dropdown-divider"></div>
+      {%- endfor %}
+      <a href="#" class="dropdown-item dropdown-footer">View all tasks</a>
+    </div>
+  </li>
+{%- endmacro %}

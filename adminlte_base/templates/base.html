@@ -1,4 +1,5 @@
 {% extends "adminlte_full/skeleton.html" %}
+{% import "adminlte_full/macros.html" as adminlte_macro with context %}
 
 {%- block styles %}
   {{ super() }}
@@ -16,23 +17,32 @@
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             {%- block navbar_left_links %}
-              {#
-                <li class="nav-item d-none d-sm-inline-block">
+              {#<li class="nav-item d-none d-sm-inline-block">
                   <a href="#" class="nav-link"></a>
-                </li>
-              #}
+                </li>#}
             {% endblock navbar_left_links -%}
           {% endblock navbar_left -%}
         </ul>
-        {%- block search_form %}{% endblock search_form -%}
+        {% block search_form -%}{% endblock search_form -%}
         <ul class="navbar-nav ml-auto">
-          {%- block navbar_right %}{% endblock navbar_right -%}
+          {%- block navbar_right -%}{%- endblock navbar_right -%}
+          {{- adminlte.render_messages(messages) }}
+          {{- adminlte.render_notifications(notifications) }}
+          {{- adminlte.render_tasks(tasks) }}
+          {{- adminlte.render_legacy_user_menu() }}
+          {#
+          <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+              <i class="fas fa-th-large"></i>
+            </a>
+          </li>
+          #}
         </ul>
       {% endblock navbar -%}
     </nav>
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-      {%- block brand_logo %}
+      {% block brand_logo -%}
         <a href="/" class="brand-link">
           <img src="{{ adminlte.static('/dist/img/AdminLTELogo.png') }}"
                alt="{{ adminlte.config('ADMINLTE_BRAND_IMAGE_ALT') }}"
@@ -40,16 +50,13 @@
                style="opacity: .8">
           <span class="brand-text font-weight-light">{{ adminlte.config('ADMINLTE_BRAND_TEXT') }}</span>
         </a>
-      {% endblock brand_logo -%}
+      {%- endblock brand_logo %}
 
       {%- block sidebar %}
         <div class="sidebar">
-          {%- block user_panel %}
-            {{ adminlte.render_user_panel() }}
-          {%- endblock user_panel %}
-
+          {{- adminlte.render_user() }}
           <nav class="mt-2">
-            {%- block nav_sidebar %}{%- endblock nav_sidebar %}
+            {%- block nav_sidebar %}{% endblock nav_sidebar -%}
           </nav>
         </div>
       {% endblock sidebar -%}
@@ -88,12 +95,14 @@
         <div class="float-right d-none d-sm-block">
           <b>Version</b> 3.0.4
         </div>
-        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io" target="_blank">AdminLTE.io</a>.</strong>
+        <strong>Ported <a href="http://github.com/kyzima-spb" target="_blank">Kirill Vercetti</a>.</strong>
+        All rights reserved.
       {% endblock main_footer -%}
     </footer>
 
     <aside class="control-sidebar control-sidebar-dark">
-      {%- block control-sidebar %}{% endblock control-sidebar -%}
+      {%- block control_sidebar %}{% endblock control_sidebar -%}
     </aside>
   </div>
 {% endblock main -%}
