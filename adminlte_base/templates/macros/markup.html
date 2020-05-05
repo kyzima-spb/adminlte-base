@@ -122,3 +122,74 @@
     </div>
   </li>
 {%- endmacro %}
+
+
+{% macro sidebar_menu(items, is_submenu=0) -%}
+  {% if not is_submenu %}
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  {% endif %}
+  {% for item in items %}
+    {% if item.type == 'header' %}
+      <li class="nav-header">{{ item.title }}</li>
+    {% else %}
+      <li class="nav-item{% if item.has_children() %} has-treeview{% endif %}">
+        <a class="nav-link{% if item.is_active() %} active{% endif %}" href="{{ item.url }}" title="{{ item.help }}">
+          {% if item.icon %}
+            <i class="nav-icon {{ item.icon }}"></i>
+          {% endif %}
+          <p>
+            {{ item.title }}
+            {% if item.has_children() %}
+              <i class="right fas fa-angle-left"></i>
+            {% endif %}
+            {% if item.badge %}
+              <span class="right badge badge-{{ item.badge.1 }}">{{ item.badge.0 }}</span>
+            {% endif %}
+          </p>
+        </a>
+        {% if item.has_children() %}
+          <ul class="nav nav-treeview">
+            {{ sidebar_menu(items=item.children, is_submenu=1) }}
+            {# :django: {% include 'adminlte_full/markup/sidebar_menu.html' with items=item.children is_submenu=1 %} #}
+          </ul>
+        {% endif %}
+      </li>
+    {% endif %}
+  {% endfor %}
+  {% if not is_submenu %}</ul>{% endif %}
+{%- endmacro %}
+
+
+{% macro navbar_menu(items) -%}
+  {% for item in items %}
+    <li class="nav-item d-none d-sm-inline-block{% if item.is_active() %} active{% endif %}{% if item.has_children() %} dropdown{% endif %}">
+      {% if item.has_children() %}
+        {{ navbar_dropdown(item) }}
+        {# :django: {% include 'adminlte_full/markup/navbar_dropdown.html' with item=item %} #}
+      {% else %}
+        <a class="nav-link" href="{{ item.url }}" title="{{ item.help }}">
+          {{ item.title }}
+        </a>
+      {% endif %}
+    </li>
+  {% endfor %}
+{%- endmacro %}
+
+
+{% macro navbar_dropdown(item, is_submenu=0) -%}
+  <a id="menu_item_{{ item.id }}" class="{% if is_submenu %}dropdown-item{% else %}nav-link{% endif %} dropdown-toggle" href="{{ item.url }}" title="{{ item.help }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+    {{ item.title }}
+  </a>
+  <ul aria-labelledby="menu_item_{{ item.id }}" class="dropdown-menu border-0 shadow">
+    {% for child in item.children %}
+      <li class="{% if child.has_children() %}dropdown-submenu dropdown-hover{% endif %}">
+        {% if child.has_children() %}
+          {{ navbar_dropdown(child, is_submenu=1) }}
+          {# :django: {% include 'adminlte_full/markup/navbar_dropdown.html' with item=child is_submenu=1 %} #}
+        {% else %}
+          <a class="dropdown-item" href="{{ child.url }}" title="{{ child.help }}">{{ child.title }}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{%- endmacro %}
