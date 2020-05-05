@@ -86,6 +86,14 @@ class Menu(object):
             if not item.has_parent():
                 yield item
 
+    def activate_by_path(self, path):
+        """Makes active a menu item whose URL matches the one specified in the argument."""
+        for item in self._items.values():
+            if item.url == path:
+                item.set_active(True)
+                return True
+        return False
+
     def add_item(self, item: MenuItem):
         if item.has_parent():
             item.parent.append_child(item)

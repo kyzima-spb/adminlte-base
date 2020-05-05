@@ -44,10 +44,10 @@ MESSAGE = 'message'
 
 # Flash message styles
 ALERTS = {
-    DEBUG: ('debug', 'fas fa-bug'),
-    ERROR: ('danger', 'fas fa-ban'),
-    WARNING: ('warning', 'fas fa-exclamation-triangle'),
-    INFO: ('info', 'fas fa-info'),
-    MESSAGE: ('info', 'fas fa-info'),
-    SUCCESS: ('success', 'fas fa-check'),
+    DEBUG: (ThemeColor.SECONDARY, 'fas fa-bug'),
+    ERROR: (ThemeColor.DANGER, 'fas fa-ban'),
+    WARNING: (ThemeColor.WARNING, 'fas fa-exclamation-triangle'),
+    INFO: (ThemeColor.INFO, 'fas fa-info'),
+    MESSAGE: (ThemeColor.INFO, 'fas fa-info'),
+    SUCCESS: (ThemeColor.SUCCESS, 'fas fa-check'),
 }
