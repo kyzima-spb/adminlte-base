@@ -101,3 +101,9 @@ class Menu(object):
 
     def get_item(self, id_item):
         return self._items.get(id_item)
+
+
+__all__ = (
+    MenuItem.__name__,
+    Menu.__name__,
+)
