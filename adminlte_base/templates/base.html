@@ -16,20 +16,19 @@
             <li class="nav-item">
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            {%- block navbar_left_links %}
-              {#<li class="nav-item d-none d-sm-inline-block">
-                  <a href="#" class="nav-link"></a>
-                </li>#}
-            {% endblock navbar_left_links -%}
+            {%- block navbar_left_links %}{% endblock navbar_left_links -%}
           {% endblock navbar_left -%}
         </ul>
         {% block search_form -%}{% endblock search_form -%}
         <ul class="navbar-nav ml-auto">
           {%- block navbar_right -%}{%- endblock navbar_right -%}
+          {#
           {{- adminlte.render_messages(messages) }}
           {{- adminlte.render_notifications(notifications) }}
           {{- adminlte.render_tasks(tasks) }}
           {{- adminlte.render_legacy_user_menu() }}
+          #}
+
           {#
           <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">

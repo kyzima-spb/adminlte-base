@@ -1,5 +1,7 @@
 {% extends "adminlte_full/skeleton.html" %}
 
+{% block page_title %}Log in{% endblock %}
+
 {% block body_attributes %} class="hold-transition login-page"{% endblock %}
 
 {% block styles %}
@@ -17,6 +19,7 @@
 
   <div class="card">
     <div class="card-body login-card-body">
+      {{ adminlte.render_flash_messages() }}
       {%- block login_message %}
         <p class="login-box-msg">Sign in to start your session</p>
       {% endblock login_message -%}
