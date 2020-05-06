@@ -6,6 +6,7 @@ class MenuItem(object):
 
     TYPE_LINK = 'link'
     TYPE_HEADER = 'header'
+    TYPE_DROPDOWN_DIVIDER = 'dropdown divider'
 
     def __init__(self, id_item, title, url, parent=None,
                  item_type=TYPE_LINK, icon=False, help=None, badge=None):

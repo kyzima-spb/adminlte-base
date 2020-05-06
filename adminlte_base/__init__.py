@@ -4,6 +4,7 @@ import pkg_resources # import importlib.resources
 
 from .constants import *
 from .data_types import *
+from .exceptions import *
 from .menu import *
 
 
@@ -27,7 +28,14 @@ class AbstractManager(metaclass=ABCMeta):
 
     def get_menu(self, program_name, active_path=None):
         """Creates and returns a menu with the specified program name."""
+        if self._menu_callback is None:
+            raise exceptions.Error('Missing menu_loader.')
+
         data = self._menu_callback(program_name)
+
+        if data is None:
+            raise exceptions.MenuNotFound(program_name)
+
         menu = Menu()
 
         for i in data.get_items():
