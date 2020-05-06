@@ -65,7 +65,7 @@
                 <span class="float-right text-sm text-{{ m.color }}"><i class="{{ m.icon }}"></i></span>
               </h3>
               <p class="text-sm">{{ m.subject }}</p>
-              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{ m.sent_at | human_date }}</p>
+              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> {{ m.sent_at | humanize }}</p>
             </div>
           </div>
         </a>
@@ -89,7 +89,7 @@
       {% for notice in notifications -%}
         <a href="{{ notice.url }}" class="dropdown-item">
           <i class="{{ notice.icon }} mr-2 text-{{ notice.color }}"></i> {{ notice.text }}
-          <span class="float-right text-muted text-sm">{{ notice.sent_at | human_date }}</span>
+          <span class="float-right text-muted text-sm">{{ notice.sent_at | humanize }}</span>
         </a>
         <div class="dropdown-divider"></div>
       {%- endfor %}
