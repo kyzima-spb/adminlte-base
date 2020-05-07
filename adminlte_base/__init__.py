@@ -5,7 +5,7 @@ import pkg_resources # import importlib.resources
 from .constants import *
 from .data_types import *
 from .exceptions import *
-from .menu import *
+from .mixins import *
 
 
 def get_template_path():
@@ -21,6 +21,9 @@ def get_static_path():
 class AbstractManager(metaclass=ABCMeta):
     def __init__(self):
         self._menu_callback = None
+        self._messages_callback = None
+        self._notifications_callback = None
+        self._tasks_callback = None
 
     @abstractmethod
     def create_url(self, endpoint, endpoint_args=None, endpoint_kwargs=None):
@@ -37,8 +40,12 @@ class AbstractManager(metaclass=ABCMeta):
             raise exceptions.MenuNotFound(program_name)
 
         menu = Menu()
+        items = sorted(
+            data.get_items(),
+            key=lambda v: (v.get_parent_id() or 0, v.get_pos(), v.get_id())
+        )
 
-        for i in data.get_items():
+        for i in items:
             menu.add_item(MenuItem(
                 id_item=i.get_id(),
                 title=i.get_title(),
@@ -70,6 +77,33 @@ class AbstractManager(metaclass=ABCMeta):
         self._menu_callback = callback
         return callback
 
-    @abstractmethod
+    def messages_loader(self, callback):
+        """
+        This sets the callback for loading a messages from the database or other source.
+
+        Arguments:
+            callback (callable): the callback for retrieving a menu object.
+        """
+        self._messages_callback = callback
+
+    def notifications_loader(self, callback):
+        """
+        This sets the callback for loading a notifications from the database or other source.
+
+        Arguments:
+            callback (callable): the callback for retrieving a menu object.
+        """
+        self._notifications_callback = callback
+
+    def tasks_loader(self, callback):
+        """
+        This sets the callback for loading a tasks from the database or other source.
+
+        Arguments:
+            callback (callable): the callback for retrieving a menu object.
+        """
+        self._tasks_callback = callback
+
     def static(self, filename):
         """Generates a URL to the given asset."""
+        raise NotImplementedError('For Django or Flask use the built-in tools.')
