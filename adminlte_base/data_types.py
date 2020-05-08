@@ -119,9 +119,38 @@ class Collection(object):
     def add(self, item):
         self.items.append(item)
 
-    @property
-    def total(self):
+    def get_total(self):
         return len(self.items)
+
+
+class Dropdown(Collection):
+    """Drop-down list in the upper navbar."""
+
+    def __init__(self, url, total_items=None):
+        """
+        Arguments:
+            url (str): he URL of the page where you can see all the elements of the collection.
+            total_items (int): the total number of elements in the storage.
+        """
+        super().__init__()
+        self.url = url
+        self.total_items = total_items
+
+    def get_total(self):
+        """
+        Returns the total number of elements in the storage,
+        if the value was passed in the constructor,
+        or the number of elements in the collection.
+        """
+        if self.total_items is None:
+            return super().get_total()
+        return self.total_items
+
+    def get_url(self):
+        """
+        Returns the URL of the page where you can see all the elements of the collection.
+        """
+        return self.url
 
 
 class DropdownItem(object):
@@ -197,6 +226,7 @@ class Task(DropdownItem):
 
 __all__ = (
     Collection.__name__,
+    Dropdown.__name__,
     Menu.__name__,
     MenuItem.__name__,
     Message.__name__,

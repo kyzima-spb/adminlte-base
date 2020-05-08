@@ -22,12 +22,16 @@
         {% block search_form -%}{% endblock search_form -%}
         <ul class="navbar-nav ml-auto">
           {%- block navbar_right -%}{%- endblock navbar_right -%}
-          {#
-          {{- adminlte.render_messages(messages) }}
-          {{- adminlte.render_notifications(notifications) }}
-          {{- adminlte.render_tasks(tasks) }}
+          {%- if adminlte.config('ADMINLTE_MESSAGES_ENABLED') %}
+            {{- adminlte.render_messages() }}
+          {% endif -%}
+          {%- if adminlte.config('ADMINLTE_NOTIFICATIONS_ENABLED') %}
+            {{- adminlte.render_notifications() }}
+          {% endif -%}
+          {%- if adminlte.config('ADMINLTE_TASKS_ENABLED') %}
+            {{- adminlte.render_tasks() }}
+          {% endif -%}
           {{- adminlte.render_legacy_user_menu() }}
-          #}
 
           {#
           <li class="nav-item">

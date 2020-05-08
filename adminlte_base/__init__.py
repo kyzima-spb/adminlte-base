@@ -29,6 +29,21 @@ class AbstractManager(metaclass=ABCMeta):
     def create_url(self, endpoint, endpoint_args=None, endpoint_kwargs=None):
         """Creates and returns a URL using the address generation system of a specific framework."""
 
+    def get_incoming_messages(self, context=None):
+        """Creates and returns a drop-down list of incoming messages."""
+        if self._messages_callback is None:
+            raise exceptions.Error('Missing messages_loader.')
+
+        if context is None:
+            messages = self._messages_callback()
+        else:
+            messages = self._messages_callback(context)
+
+        if not isinstance(messages, Dropdown):
+            raise exceptions.Error(f'{type(messages).__name__} unsupported return type for messages_loader; Dropdown required.')
+
+        return messages
+
     def get_menu(self, program_name, active_path=None):
         """Creates and returns a menu with the specified program name."""
         if self._menu_callback is None:
@@ -62,6 +77,37 @@ class AbstractManager(metaclass=ABCMeta):
             menu.activate_by_path(active_path)
 
         return menu
+
+    def get_notifications(self, context=None):
+        """Creates and returns a drop-down list of notifications."""
+        if self._notifications_callback is None:
+            raise exceptions.Error('Missing notifications_loader.')
+
+        if context is None:
+            notifications = self._notifications_callback()
+        else:
+            notifications = self._notifications_callback(context)
+
+        if not isinstance(notifications, Dropdown):
+            raise exceptions.Error(f'{type(notifications).__name__} unsupported return type for notifications_loader; Dropdown required.')
+
+        return notifications
+
+    def get_tasks(self, context=None):
+        """Creates and returns a drop-down list of assigned or executable tasks."""
+        if self._tasks_callback is None:
+            raise exceptions.Error('Missing tasks_loader.')
+
+        if context is None:
+            tasks = self._tasks_callback()
+        else:
+            tasks = self._tasks_callback(context)
+
+        if not isinstance(tasks, Dropdown):
+            raise exceptions.Error(
+                f'{type(tasks).__name__} unsupported return type for tasks_loader; Dropdown required.')
+
+        return tasks
 
     def menu_loader(self, callback):
         """
