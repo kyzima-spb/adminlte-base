@@ -128,6 +128,20 @@
 {%- endmacro %}
 
 
+{% macro search_form(action, method='post') -%}
+  <form class="form-inline ml-3" method="{{ method }}"{% if action %}action="{{ action }}"{% endif %}>
+    <div class="input-group input-group-sm">
+      <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+      <div class="input-group-append">
+        <button class="btn btn-navbar" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+{%- endmacro %}
+
+
 {% macro sidebar_menu(items, is_submenu=0) -%}
   {%- if not is_submenu %}
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
