@@ -129,7 +129,7 @@
 
 
 {% macro search_form(action, method='post') -%}
-  <form class="form-inline ml-3" method="{{ method }}"{% if action %}action="{{ action }}"{% endif %}>
+  <form class="form-inline ml-0 ml-md-3" method="{{ method }}"{% if action %}action="{{ action }}"{% endif %}>
     <div class="input-group input-group-sm">
       <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
       <div class="input-group-append">
@@ -179,7 +179,7 @@
 {% macro navbar_menu(items) -%}
   {%- for item in items %}
     {%- if item.type == item.TYPE_LINK %}
-      <li class="nav-item d-none d-sm-inline-block{% if item.is_active() %} active{% endif %}{% if item.has_children() %} dropdown{% endif %}">
+      <li class="nav-item {% if item.is_active() %} active{% endif %}{% if item.has_children() %} dropdown{% endif %}">
         {%- if item.has_children() %}
           {{ navbar_dropdown(item) }}
           {# :django: {% include 'adminlte_full/markup/navbar_dropdown.html' with item=item %} #}

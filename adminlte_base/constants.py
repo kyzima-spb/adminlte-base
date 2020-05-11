@@ -1,4 +1,19 @@
+# self.app.config.setdefault('ADMINLTE_FULL_THEME', 'skin-blue')
+
+
+class ThemeLayout(object):
+    """Layout Options"""
+    BOXED = 'sidebar-mini layout-boxed'
+    COLLAPSED_SIDEBAR = 'sidebar-mini sidebar-collapse'
+    DEFAULT = 'sidebar-mini'
+    FIXED_FOOTER = 'sidebar-mini layout-footer-fixed'
+    FIXED_SIDEBAR = 'sidebar-mini layout-fixed'
+    FIXED_TOPNAV = 'sidebar-mini layout-navbar-fixed' # fixme: sidebar height bug, wait...
+    TOP_NAV = 'sidebar-collapse layout-top-nav'
+
+
 DEFAULT_SETTINGS = {
+    'ADMINLTE_LAYOUT': ThemeLayout.DEFAULT,
     'ADMINLTE_SITE_TITLE': 'AdminLTE 3',
 
     'ADMINLTE_BRAND_TEXT': 'AdminLTE 3',
@@ -8,6 +23,7 @@ DEFAULT_SETTINGS = {
     'ADMINLTE_ALLOW_REGISTRATION': True,
     'ADMINLTE_REMEMBER_ME': True,
     'ADMINLTE_PASSWORD_RESET': True,
+    'ADMINLTE_SIDEBAR_ENABLED': True,
     'ADMINLTE_MESSAGES_ENABLED': False,
     'ADMINLTE_NOTIFICATIONS_ENABLED': False,
     'ADMINLTE_TASKS_ENABLED': False,
