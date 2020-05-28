@@ -1,28 +1,23 @@
 {% extends "adminlte_full/base.html" %}
 {% import "adminlte_full/macros.html" as adminlte_macro with context %}
 
-{%- block navbar_top %}
+{% block navbar_top %}
   <div class="container">
-    {# :flask:
-      {%- with class_attr = 'navbar-brand' %}
-        {%- include 'adminlte_full/includes/brand_logo.html' %}
-      {% endwith -%}
-    #}
-    {# :django:
-      {% include 'adminlte_full/includes/brand_logo.html' with class_attr='navbar-brand' %}
-    #}
+    {% with class_attr='navbar-brand' %}
+      {% include 'adminlte_full/includes/brand_logo.html' %}
+    {% endwith %}
     {{ super() }}
   </div>
-{% endblock navbar_top -%}
+{% endblock navbar_top %}
 
-{%- block content_header %}
+{% block content_header %}
   <div class="container">
     <div class="row">{{ super() }}</div>
   </div>
-{% endblock content_header -%}
+{% endblock content_header %}
 
-{%- block content %}
+{% block content %}
   <div class="container">
     <div class="row">{{ super() }}</div>
   </div>
-{% endblock content -%}
+{% endblock content %}
