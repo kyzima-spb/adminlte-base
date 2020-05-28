@@ -14,7 +14,7 @@
 
 
 {%- macro user_sidebar_panel(user, profile_url) -%}
-  {%- if not adminlte.config('ADMINLTE_LEGACY_USER_MENU') and user.is_authenticated -%}
+  {% if not config['ADMINLTE_LEGACY_USER_MENU'] and user.is_authenticated %}
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img src="{{ user.email | gravatar }}" class="img-circle elevation-2" alt="User Image">
@@ -23,28 +23,28 @@
         <a href="{{ profile_url }}" class="d-block">{{ user }}</a>
       </div>
     </div>
-  {%- endif -%}
+  {% endif %}
 {%- endmacro -%}
 
 
 {% macro legacy_user_menu(user, profile_url) -%}
-  {%- if user.is_authenticated %}
-    {%- if adminlte.config('ADMINLTE_LEGACY_USER_MENU') %}
+  {% if user.is_authenticated %}
+    {% if config['ADMINLTE_LEGACY_USER_MENU'] %}
       <li class="nav-item dropdown user-menu">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
           <img src="{{ user.email | gravatar }}" class="user-image img-circle elevation-2" alt="User Image">
           <span class="d-none d-md-inline">{{ user }}</span>
         </a>
-        {%- include 'adminlte_full/includes/legacy_user_dropdown.html' %}
+        {% include 'adminlte_full/includes/legacy_user_dropdown.html' %}
       </li>
-    {%- else %}
+    {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="{{ adminlte.url(adminlte.config('ADMINLTE_LOGOUT_ENDPOINT')) }}">
+        <a class="nav-link" href="{{ url_for(config['ADMINLTE_LOGOUT_ENDPOINT']) }}">
           <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
-    {% endif -%}
-  {% endif -%}
+    {% endif %}
+  {% endif %}
 {%- endmacro %}
 
 
@@ -57,7 +57,7 @@
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <span class="dropdown-item dropdown-header">{{ messages.get_total() }} Messages</span>
       <div class="dropdown-divider"></div>
-      {% for m in messages -%}
+      {% for m in messages %}
         <a href="{{ m.url }}" class="dropdown-item">
           <div class="media">
             <img src="{{ m.sender.email | gravatar }}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
@@ -72,7 +72,7 @@
           </div>
         </a>
         <div class="dropdown-divider"></div>
-      {%- endfor %}
+      {% endfor %}
       <a href="{{ messages.get_url() }}" class="dropdown-item dropdown-footer">See All Messages</a>
     </div>
   </li>
@@ -88,13 +88,13 @@
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <span class="dropdown-item dropdown-header">{{ notifications.get_total() }} Notifications</span>
       <div class="dropdown-divider"></div>
-      {% for notice in notifications -%}
+      {% for notice in notifications %}
         <a href="{{ notice.url }}" class="dropdown-item">
           <i class="{{ notice.icon }} mr-2 text-{{ notice.color }}"></i> {{ notice.text }}
           <span class="float-right text-muted text-sm">{{ notice.sent_at | humanize }}</span>
         </a>
         <div class="dropdown-divider"></div>
-      {%- endfor %}
+      {% endfor %}
       <a href="{{ notifications.get_url() }}" class="dropdown-item dropdown-footer">See All Notifications</a>
     </div>
   </li>
@@ -110,7 +110,7 @@
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <span class="dropdown-item dropdown-header">{{ tasks.get_total() }} Tasks</span>
       <div class="dropdown-divider"></div>
-      {% for task in tasks -%}
+      {% for task in tasks %}
         <a href="{{ task.url }}" class="dropdown-item">
           <div class="progress-group">
             {{ task.title }}
@@ -121,7 +121,7 @@
           </div>
         </a>
         <div class="dropdown-divider"></div>
-      {%- endfor %}
+      {% endfor %}
       <a href="{{ tasks.get_url() }}" class="dropdown-item dropdown-footer">See all tasks</a>
     </div>
   </li>
@@ -143,52 +143,50 @@
 
 
 {% macro sidebar_menu(items, is_submenu=0) -%}
-  {%- if not is_submenu %}
+  {% if not is_submenu %}
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-  {% endif -%}
-  {%- for item in items %}
-    {%- if item.type == item.TYPE_HEADER %}
+  {% endif %}
+  {% for item in items %}
+    {% if item.type == item.TYPE_HEADER %}
       <li class="nav-header">{{ item.title }}</li>
-    {%- elif item.type == item.TYPE_LINK %}
+    {% elif item.type == item.TYPE_LINK %}
       <li class="nav-item{% if item.has_children() %} has-treeview{% endif %}">
         <a class="nav-link{% if item.is_active() %} active{% endif %}" href="{{ item.url }}" title="{{ item.help }}">
           <i class="nav-icon {% if item.icon %}{{ item.icon }}{% else %}far fa-circle{% endif %}"></i>
           <p>
             {{ item.title }}
-            {%- if item.has_children() %}
+            {% if item.has_children() %}
               <i class="right fas fa-angle-left"></i>
-            {% endif -%}
-            {%- if item.badge %}
+            {% endif %}
+            {% if item.badge %}
               <span class="right badge badge-{{ item.badge.1 }}">{{ item.badge.0 }}</span>
-            {% endif -%}
+            {% endif %}
           </p>
         </a>
-        {%- if item.has_children() %}
+        {% if item.has_children() %}
           <ul class="nav nav-treeview">
-            {{- sidebar_menu(items=item.children, is_submenu=1) }}
-            {# :django: {% include 'adminlte_full/markup/sidebar_menu.html' with items=item.children is_submenu=1 %} #}
+            {{ sidebar_menu(items=item.children, is_submenu=1) }}
           </ul>
-        {% endif -%}
+        {% endif %}
       </li>
-    {% endif -%}
-  {% endfor -%}
-  {%- if not is_submenu %}</ul>{% endif -%}
+    {% endif %}
+  {% endfor %}
+  {% if not is_submenu %}</ul>{% endif %}
 {%- endmacro %}
 
 
 {% macro navbar_menu(items) -%}
-  {%- for item in items %}
-    {%- if item.type == item.TYPE_LINK %}
+  {% for item in items %}
+    {% if item.type == item.TYPE_LINK %}
       <li class="nav-item {% if item.is_active() %} active{% endif %}{% if item.has_children() %} dropdown{% endif %}">
-        {%- if item.has_children() %}
-          {{ navbar_dropdown(item) }}
-          {# :django: {% include 'adminlte_full/markup/navbar_dropdown.html' with item=item %} #}
-        {%- else %}
+        {% if item.has_children() %}
+          {{ navbar_dropdown(item=item) }}
+        {% else %}
           <a class="nav-link" href="{{ item.url }}" title="{{ item.help }}">{{ item.title }}</a>
-        {% endif -%}
+        {% endif %}
       </li>
-    {% endif -%}
-  {% endfor -%}
+    {% endif %}
+  {% endfor %}
 {%- endmacro %}
 
 
@@ -197,19 +195,18 @@
     {{ item.title }}
   </a>
   <ul aria-labelledby="menu_item_{{ item.id }}" class="dropdown-menu border-0 shadow">
-    {%- for child in item.children %}
-      {%- if child.type == child.TYPE_LINK %}
+    {% for child in item.children %}
+      {% if child.type == child.TYPE_LINK %}
         <li class="{% if child.has_children() %}dropdown-submenu dropdown-hover{% endif %}">
-          {%- if child.has_children() %}
-            {{ navbar_dropdown(child, is_submenu=1) }}
-            {# :django: {% include 'adminlte_full/markup/navbar_dropdown.html' with item=child is_submenu=1 %} #}
-          {%- else %}
+          {% if child.has_children() %}
+            {{ navbar_dropdown(item=child, is_submenu=1) }}
+          {% else %}
             <a class="dropdown-item" href="{{ child.url }}" title="{{ child.help }}">{{ child.title }}</a>
-          {% endif -%}
+          {% endif %}
         </li>
-      {%- elif child.type == child.TYPE_DROPDOWN_DIVIDER %}
+      {% elif child.type == child.TYPE_DROPDOWN_DIVIDER %}
         <li class="dropdown-divider"></li>
-      {% endif -%}
-    {% endfor -%}
+      {% endif %}
+    {% endfor %}
   </ul>
 {%- endmacro %}
