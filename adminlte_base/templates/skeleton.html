@@ -12,9 +12,9 @@
   {% endblock meta %}
   <title>{% block title %}{% block page_title %}{% endblock page_title %} | {% block site_title %}{{ config['ADMINLTE_SITE_TITLE'] }}{% endblock site_title %}{% endblock title %}</title>
   {% block styles %}
-    <link type="image/x-icon" rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/adminlte.min.css') }}">
+    <link type="image/x-icon" rel="shortcut icon" href="{{ url_for('adminlte_full.static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('adminlte_full.static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('adminlte_full.static', filename='dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   {% endblock styles %}
@@ -27,9 +27,9 @@
 {% block body %}
   {% block main %}{% endblock %}
   {% block javascript %}
-    <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ url_for('adminlte_full.static', filename='plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('adminlte_full.static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('adminlte_full.static', filename='dist/js/adminlte.min.js') }}"></script>
   {% endblock %}
   {% block javascript_inline %}{% endblock %}
 {% endblock %}
