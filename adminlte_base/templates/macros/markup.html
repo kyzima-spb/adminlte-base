@@ -128,10 +128,10 @@
 {%- endmacro %}
 
 
-{% macro search_form(action, method='post') -%}
-  <form class="form-inline ml-0 ml-md-3" method="{{ method }}"{% if action %}action="{{ action }}"{% endif %}>
+{% macro navbar_search_form() -%}
+  <form class="form-inline ml-0 ml-md-3" action="{{ url_for(config['ADMINLTE_SEARCH_ENDPOINT']) }}" method="get">
     <div class="input-group input-group-sm">
-      <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+      <input name="q" type="search" class="form-control form-control-navbar" placeholder="Search" aria-label="Search">
       <div class="input-group-append">
         <button class="btn btn-navbar" type="submit">
           <i class="fas fa-search"></i>

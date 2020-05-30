@@ -26,6 +26,7 @@ DEFAULT_SETTINGS = {
     'ADMINLTE_SIDEBAR_ENABLED': True,
     'ADMINLTE_MESSAGES_ENABLED': False,
     'ADMINLTE_NOTIFICATIONS_ENABLED': False,
+    'ADMINLTE_SEARCH_ENABLED': False,
     'ADMINLTE_TASKS_ENABLED': False,
 
     'ADMINLTE_REGISTRATION_ENDPOINT': 'auth.registration',
@@ -34,6 +35,7 @@ DEFAULT_SETTINGS = {
     'ADMINLTE_CHANGE_PASSWORD_ENDPOINT': 'auth.change_password',
     'ADMINLTE_PASSWORD_RESET_ENDPOINT': 'auth.reset_password',
     'ADMINLTE_PASSWORD_RECOVER_ENDPOINT': 'auth.recover_password',
+    'ADMINLTE_SEARCH_ENDPOINT': 'search',
 
     'ADMINLTE_PROFILE_ENDPOINT': 'user.profile',
 }
@@ -51,6 +53,10 @@ class ThemeColor(object):
     LIGHT = 'light'
     DARK = 'dark'
     MUTED = 'muted'
+    GRADIENT_PRIMARY = 'gradient-primary'
+    GRADIENT_SUCCESS = 'gradient-success'
+    GRADIENT_DANGER = 'gradient-danger'
+    GRADIENT_WARNING = 'gradient-warning'
 
 
 # Flash message levels
