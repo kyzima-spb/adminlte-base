@@ -31,7 +31,7 @@
     <script src="{{ url_for('adminlte_full.static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url_for('adminlte_full.static', filename='dist/js/adminlte.min.js') }}"></script>
   {% endblock %}
-  {% block javascript_inline %}{% endblock %}
+  <script>{% block javascript_inline %}{% endblock %}</script>
 {% endblock %}
 </body>
 </html>

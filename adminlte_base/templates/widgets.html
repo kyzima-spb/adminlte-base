@@ -31,13 +31,14 @@
                      color='',
                      bg_color='',
                      outline=false,
+                     card_class='',
                      maximizable=false,
                      collapsable=false,
                      expandable=false,
                      closable=false,
                      data_source=none,
                      refreshable_options='') %}
-  <div class="card card-{{ color }} bg-{{ bg_color }}{%if outline %} card-outline{% endif %}{%if expandable %} collapsed-card{% endif %}" id="{{ card_id }}">
+  <div class="card {{ card_class }} card-{{ color }} bg-{{ bg_color }}{%if outline %} card-outline{% endif %}{%if expandable %} collapsed-card{% endif %}" id="{{ card_id }}">
     <div class="card-header">
       <h3 class="card-title">{{ title }}</h3>
       {{ render_card_tools(maximizable=maximizable,
@@ -57,4 +58,46 @@
     </div>
     {# footer #}
   </div>
+{% endmacro %}
+
+{% macro render_table(data, headers=none, footer=false, auto_number=false, table_id='', table_class='') %}
+  {% set table_header %}
+    {% if headers %}
+      <tr>
+        {% if auto_number %}<th style="width: 1em">#</th>{% endif %}
+        {% if headers is mapping %}
+          <th>{{ headers.values() | join('</th><th>' | safe) }}</th>
+        {% else %}
+          <th>{{ headers | join('</th><th>' | safe) }}</th>
+        {% endif %}
+      </tr>
+    {% endif %}
+  {% endset %}
+  <table id="{{ table_id }}" class="table {{ table_class }}">
+    <thead>{{ table_header }}</thead>
+    <tbody>
+      {% for row in data %}
+        <tr>
+          {% if auto_number %}<td>{{ loop.index }}</td>{% endif %}
+          {{ caller(row) }}
+        </tr>
+      {% endfor %}
+    </tbody>
+    {% if footer %}<tfoot>{{ table_header }}</tfoot>{% endif %}
+  </table>
+{% endmacro %}
+
+
+{% macro render_data_table(data, headers=none, footer=false, auto_number=false, table_id='', table_class='') %}
+  {% call(row) render_table(data=data, headers=headers, footer=footer, auto_number=auto_number, table_id=table_id, table_class=table_class) %}
+    {% if headers is mapping %}
+      {% for col in headers %}
+        <td>{{ row[col] }}</td>
+      {% endfor %}
+    {% else %}
+      {% for col in row %}
+        <td>{{ col }}</td>
+      {% endfor %}
+    {% endif %}
+  {% endcall %}
 {% endmacro %}
