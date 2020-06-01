@@ -1,0 +1,27 @@
+{% macro field(field, form_group_class='form-group', placeholder='', addon_after=None) %}
+  <div class="{{ form_group_class }}">
+    {%- if field.errors %}
+      {% set valid_class='is-invalid' %}
+    {%- else %}
+      {% set valid_class='' %}
+    {% endif -%}
+
+    {{ field(class="form-control " + valid_class, placeholder=placeholder) }}
+
+    {%- if addon_after %}
+      <div class="input-group-append">
+        <div class="input-group-text">
+          {{ addon_after|safe }}
+        </div>
+      </div>
+    {% endif -%}
+
+    {%- if field.errors %}
+      <div class="invalid-feedback">
+        {%- for error in field.errors %}
+          <p>{{ error }}</p>
+        {% endfor -%}
+      </div>
+    {% endif -%}
+  </div>
+{% endmacro %}

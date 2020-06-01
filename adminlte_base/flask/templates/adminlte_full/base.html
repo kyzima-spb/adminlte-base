@@ -1,5 +1,6 @@
 {% extends "adminlte_full/skeleton.html" %}
 {% import "adminlte_full/macros.html" as adminlte_macro with context %}
+{% import 'adminlte_full/macros/markup.html' as html %}
 
 {% block body_attributes %} class="hold-transition {{ config['ADMINLTE_LAYOUT'] }}"{% endblock %}
 
@@ -15,7 +16,11 @@
 
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
           <div class="order-2">
-            {% block search_form %}{% endblock search_form %}
+            {% block search_form %}
+              {% if config['ADMINLTE_SEARCH_ENABLED'] %}
+                {{ html.navbar_search_form() }}
+              {% endif %}
+            {% endblock search_form %}
           </div>
           <ul class="navbar-nav order-1">
             {% block navbar_left %}{% endblock navbar_left %}
@@ -25,16 +30,16 @@
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           {% block navbar_right %}
             {% if config['ADMINLTE_MESSAGES_ENABLED'] %}
-              {{ adminlte.render_messages() }}
+              {{ adminlte_macro.render_messages() }}
             {% endif %}
             {% if config['ADMINLTE_NOTIFICATIONS_ENABLED'] %}
-              {{ adminlte.render_notifications() }}
+              {{ adminlte_macro.render_notifications() }}
             {% endif %}
             {% if config['ADMINLTE_TASKS_ENABLED'] %}
-              {{ adminlte.render_tasks() }}
+              {{ adminlte_macro.render_tasks() }}
             {% endif %}
           {% endblock navbar_right %}
-          {{ adminlte.render_legacy_user_menu() }}
+          {{ adminlte_macro.render_legacy_user_menu() }}
           <li class="nav-item d-sm-none">
             <a class="nav-link" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" href="#" role="button">
               <i class="fas fa-caret-down"></i>
@@ -57,7 +62,7 @@
         {% endwith %}
         <div class="sidebar">
           {% block sidebar %}
-            {{ adminlte.render_user() }}
+            {{ adminlte_macro.render_user() }}
             <nav class="mt-2">
               {% block sidebar_nav %}{% endblock sidebar_nav %}
             </nav>
@@ -92,7 +97,7 @@
         <section class="content">
           {% block content %}
             <div class="container-fluid">
-              {{ adminlte.render_flash_messages() }}
+              {{ adminlte_macro.render_flash_messages() }}
               {% block page_content %}{% endblock %}
             </div>
           {% endblock content %}

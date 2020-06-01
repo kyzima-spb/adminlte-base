@@ -1,3 +1,8 @@
+"""
+Mixins to create your own entity classes.
+"""
+
+
 class MenuItemMixin(object):
     """Mixin for the database model, which describes the menu item."""
 

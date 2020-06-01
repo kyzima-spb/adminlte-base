@@ -1,5 +1,5 @@
 class Error(Exception):
-    pass
+    """The base type for all exceptions thrown in the library."""
 
 
 class MenuNotFound(Error, ValueError):

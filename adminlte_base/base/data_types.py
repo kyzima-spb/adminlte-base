@@ -1,9 +1,11 @@
+"""
+Entities used in templates.
+"""
+
+from collections import OrderedDict
 from datetime import datetime
 
 from .constants import ThemeColor
-
-
-from collections import OrderedDict
 
 
 class MenuItem(object):

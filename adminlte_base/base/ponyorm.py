@@ -1,5 +1,11 @@
-from adminlte_base import MenuItemMixin, MenuMixin, MenuItem
+"""
+Provides functions for creating entities for use with PonyORM.
+"""
+
 from pony.orm import Required, Optional, Set, LongStr
+
+from .data_types import MenuItem
+from .mixins import MenuItemMixin, MenuMixin
 
 
 def before_insert(self):

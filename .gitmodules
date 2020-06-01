@@ -2,9 +2,6 @@
 	path = django-adminlte-full
 	url = git@github.com:kyzima-spb/django-adminlte-full.git
 	branch = dev-master
-[submodule "flask-adminlte-full"]
-	path = flask-adminlte-full
-	url = git@github.com:kyzima-spb/flask-adminlte-full.git
 [submodule "AdminLTE"]
 	path = AdminLTE
 	url = https://github.com/ColorlibHQ/AdminLTE.git

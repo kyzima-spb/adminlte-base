@@ -1,21 +1,14 @@
+"""
+A basic package to simplify the integration of AdminLTE with other frameworks.
+"""
+
 from abc import ABCMeta, abstractmethod
-import pkg_resources # import importlib.resources
 
 
 from .constants import *
 from .data_types import *
 from .exceptions import *
 from .mixins import *
-
-
-def get_template_path():
-    """Returns the path to the template directory."""
-    return pkg_resources.resource_filename(__name__, 'templates')
-
-
-def get_static_path():
-    """Returns the path to the asset directory."""
-    return pkg_resources.resource_filename(__name__, 'static')
 
 
 class AbstractManager(metaclass=ABCMeta):
@@ -152,4 +145,3 @@ class AbstractManager(metaclass=ABCMeta):
 
     def static(self, filename):
         """Generates a URL to the given asset."""
-        raise NotImplementedError('For Django or Flask use the built-in tools.')

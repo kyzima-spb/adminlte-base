@@ -1,3 +1,7 @@
+"""
+Provides ready-made implementations for filters used in templates.
+"""
+
 import arrow
 from dateutil import tz
 

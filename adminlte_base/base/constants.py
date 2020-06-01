@@ -1,4 +1,6 @@
-# self.app.config.setdefault('ADMINLTE_FULL_THEME', 'skin-blue')
+"""
+Contains all the constant values used in the library.
+"""
 
 
 class ThemeLayout(object):
