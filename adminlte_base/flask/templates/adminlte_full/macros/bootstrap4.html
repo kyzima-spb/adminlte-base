@@ -25,3 +25,18 @@
     {% endif -%}
   </div>
 {% endmacro %}
+
+
+{% macro render_pagination(pages, pagination_class='') %}
+  <ul class="pagination{% if pagination_class %} {{ pagination_class }}{% endif %}">
+    {% for item in pages %}
+      <li class="page-item{% if item.is_active %} active{% endif %}{% if item.disabled %} disabled{% endif %}">
+        <a class="page-link" href="{{ item.url }}">
+          <span class="d-md-none">{{ item.responsive|safe }}</span>
+          <span class="d-none d-md-block">{{ item.text|safe }}</span>
+          {% if item.is_active %} <span class="sr-only">(current)</span>{% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}

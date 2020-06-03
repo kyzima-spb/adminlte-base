@@ -1,3 +1,18 @@
+{% import "adminlte_full/macros/bootstrap4.html" as bootstrap %}
+
+
+{% macro render_card_wrapper(content=none,
+                             card_id='',
+                             color='',
+                             bg_color='',
+                             outline=false,
+                             card_class='') %}
+  <div class="card card-{{ color }} bg-{{ bg_color }}{% if outline %} card-outline{% endif %} {{ card_class }}" id="{{ card_id }}">
+    {% if content is none %}{{ caller() }}{% else %}{{ content }}{% endif %}
+  </div>
+{% endmacro %}
+
+
 {% macro render_card_tools(maximizable=false,
                            collapsable=false,
                            expandable=false,
@@ -26,7 +41,7 @@
 
 
 {% macro render_card(title='',
-                     body=none,
+                     content=none,
                      card_id='',
                      color='',
                      bg_color='',
@@ -38,7 +53,15 @@
                      closable=false,
                      data_source=none,
                      refreshable_options='') %}
-  <div class="card {{ card_class }} card-{{ color }} bg-{{ bg_color }}{%if outline %} card-outline{% endif %}{%if expandable %} collapsed-card{% endif %}" id="{{ card_id }}">
+  {% if expandable %}
+    {% set card_class = card_class + ' collapsed-card' %}
+  {% endif %}
+
+  {% if content is none %}
+    {% set content = caller() %}
+  {% endif %}
+
+  {% call render_card_wrapper(card_id=card_id, color=color, bg_color=bg_color, outline=outline, card_class=card_class) %}
     <div class="card-header">
       <h3 class="card-title">{{ title }}</h3>
       {{ render_card_tools(maximizable=maximizable,
@@ -49,16 +72,10 @@
                            refreshable_options=refreshable_options)
       }}
     </div>
-    <div class="card-body">
-      {% if body is none %}
-        {{ caller() }}
-      {% else %}
-        {{ body }}
-      {% endif %}
-    </div>
-    {# footer #}
-  </div>
+    {{ content }}
+  {% endcall %}
 {% endmacro %}
+
 
 {% macro render_table(data, headers=none, footer=false, auto_number=false, table_id='', table_class='') %}
   {% set table_header %}
