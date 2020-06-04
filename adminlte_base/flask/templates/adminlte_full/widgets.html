@@ -77,6 +77,50 @@
 {% endmacro %}
 
 
+{% macro render_info_box(text, number, icon, color='', bg_color='', progress=none, progress_description='') %}
+  <div class="info-box{% if bg_color %} bg-{{ bg_color }}{% endif %}">
+    <span class="info-box-icon{% if color %} bg-{{ color }}{% endif %}"><i class="{{ icon }}"></i></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">{{ text }}</span>
+      <span class="info-box-number">{{ number }}</span>
+
+      {% if progress is not none %}
+        <div class="progress">
+          <div class="progress-bar" style="width: {{ progress }}%"></div>
+        </div>
+        {% if progress_description %}
+          <span class="progress-description">{{ progress_description }}</span>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+
+{% macro render_small_box(title, text, icon, url='', color='', overlay=false, overlay_dark=false) %}
+  <div class="small-box{% if color %} bg-{{ color }}{% endif %}">
+    {% if overlay or overlay_dark %}
+      <div class="overlay{% if overlay_dark %} dark{% endif %}">
+        <i class="fas fa-3x fa-sync-alt"></i>
+      </div>
+    {% endif %}
+    <div class="inner">
+      <h3>{{ title|safe }}</h3>
+      <p>{{ text|safe }}</p>
+    </div>
+    <div class="icon">
+      <i class="{{ icon }}"></i>
+    </div>
+    {% if url %}
+      <a href="{{ url }}" class="small-box-footer">
+        More info <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+
 {% macro render_table(data, headers=none, footer=false, auto_number=false, table_id='', table_class='') %}
   {% set table_header %}
     {% if headers %}
