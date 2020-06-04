@@ -42,26 +42,36 @@
 
 {% macro render_card(title='',
                      content=none,
+                     body=none,
+                     body_class='',
                      card_id='',
+                     card_class='',
                      color='',
                      bg_color='',
                      outline=false,
-                     card_class='',
                      maximizable=false,
                      collapsable=false,
                      expandable=false,
                      closable=false,
                      data_source=none,
-                     refreshable_options='') %}
+                     refreshable_options='',
+                     overlay=false,
+                     overlay_dark=false) %}
   {% if expandable %}
     {% set card_class = card_class + ' collapsed-card' %}
   {% endif %}
 
-  {% if content is none %}
+  {% if body is not none %}
+    {% set content %}
+      <div class="card-body{% if body_class %} {{ body_class }}{% endif %}">
+        {{ body }}
+      </div>
+    {% endset %}
+  {% elif content is none %}
     {% set content = caller() %}
   {% endif %}
 
-  {% call render_card_wrapper(card_id=card_id, color=color, bg_color=bg_color, outline=outline, card_class=card_class) %}
+  {% call render_card_wrapper(card_id=card_id, card_class=card_class, color=color, bg_color=bg_color, outline=outline) %}
     <div class="card-header">
       <h3 class="card-title">{{ title }}</h3>
       {{ render_card_tools(maximizable=maximizable,
@@ -73,6 +83,11 @@
       }}
     </div>
     {{ content }}
+    {% if overlay or overlay_dark %}
+      <div class="overlay{% if overlay_dark %} dark{% endif %}">
+        <i class="fas fa-2x fa-sync-alt"></i>
+      </div>
+    {% endif %}
   {% endcall %}
 {% endmacro %}
 
