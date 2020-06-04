@@ -111,6 +111,22 @@ class Menu(object):
         return self._items.get(id_item)
 
 
+class PageItem(object):
+    """Элемент постраничной навигации."""
+    def __init__(self, text, url='#', is_active=False, disabled=False, responsive=None):
+        self.text = text
+        self.url = url
+        self.is_active = is_active
+        self.disabled = disabled
+        self.responsive_text = responsive
+
+    @property
+    def responsive(self):
+        if not self.responsive_text:
+            return self.text
+        return self.responsive_text
+
+
 class Collection(object):
     def __init__(self):
         self.items = []
@@ -195,7 +211,7 @@ class Notification(DropdownItem):
 
     __slots__ = ('text', 'sent_at', 'url')
 
-    def __init__(self, text, sent_at=None, url='#', icon=None, color=ThemeColor.DARK):
+    def __init__(self, text, sent_at=None, url='#', icon=None, color=ThemeColor.GRAY_DARK):
         """
         Arguments:
             text (str): notification text.

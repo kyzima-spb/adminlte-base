@@ -14,6 +14,43 @@ class ThemeLayout(object):
     TOP_NAV = 'sidebar-collapse layout-top-nav'
 
 
+class ThemeColor(object):
+    """Color styles."""
+
+    PRIMARY = 'primary'
+    SECONDARY = 'secondary'
+    INFO = 'info'
+    SUCCESS = 'success'
+    WARNING = 'warning'
+    DANGER = 'danger'
+
+    WHITE = 'white'
+    BLACK = 'black'
+    GRAY_DARK = 'gray-dark'
+    GRAY = 'gray'
+    LIGHT = 'light'
+
+    INDIGO = 'indigo'
+    LIGHTBLUE = 'lightblue'
+    NAVY = 'navy'
+    PURPLE = 'purple'
+    FUCHSIA = 'fuchsia'
+    PINK = 'pink'
+    MAROON = 'maroon'
+    ORANGE = 'orange'
+    LIME = 'lime'
+    TEAL = 'teal'
+    OLIVE = 'olive'
+
+    MUTED = 'muted'
+
+    GRADIENT_PRIMARY = 'gradient-primary'
+    GRADIENT_SUCCESS = 'gradient-success'
+    GRADIENT_DANGER = 'gradient-danger'
+    GRADIENT_WARNING = 'gradient-warning'
+    GRADIENT_INFO = 'gradient-info'
+
+
 DEFAULT_SETTINGS = {
     'ADMINLTE_LAYOUT': ThemeLayout.DEFAULT,
     'ADMINLTE_SITE_TITLE': 'AdminLTE 3',
@@ -21,6 +58,12 @@ DEFAULT_SETTINGS = {
     'ADMINLTE_BRAND_TEXT': 'AdminLTE 3',
     'ADMINLTE_BRAND_IMAGE_ALT': 'AdminLTE Logo',
     'ADMINLTE_LEGACY_USER_MENU': False,
+
+    'ADMINLTE_ACCENT_COLOR': None,
+    'ADMINLTE_BRAND_LOGO_COLOR': None,
+    'ADMINLTE_NAVBAR_COLOR': ThemeColor.WHITE,
+    'ADMINLTE_SIDEBAR_COLOR': ThemeColor.PRIMARY,
+    'ADMINLTE_SIDEBAR_LIGHT': False,
 
     'ADMINLTE_ALLOW_REGISTRATION': True,
     'ADMINLTE_REMEMBER_ME': True,
@@ -41,24 +84,6 @@ DEFAULT_SETTINGS = {
 
     'ADMINLTE_PROFILE_ENDPOINT': 'user.profile',
 }
-
-
-# Color styles
-
-class ThemeColor(object):
-    PRIMARY = 'primary'
-    SECONDARY = 'secondary'
-    SUCCESS = 'success'
-    DANGER = 'danger'
-    WARNING = 'warning'
-    INFO = 'info'
-    LIGHT = 'light'
-    DARK = 'dark'
-    MUTED = 'muted'
-    GRADIENT_PRIMARY = 'gradient-primary'
-    GRADIENT_SUCCESS = 'gradient-success'
-    GRADIENT_DANGER = 'gradient-danger'
-    GRADIENT_WARNING = 'gradient-warning'
 
 
 # Flash message levels

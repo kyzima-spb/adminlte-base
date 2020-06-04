@@ -1,4 +1,4 @@
-<a href="/" class="{{ class_attr }}">
+<a href="/" class="{{ class_attr }}{% if config['ADMINLTE_BRAND_LOGO_COLOR'] %} {{ config['ADMINLTE_BRAND_LOGO_COLOR'] | navbar_skin }}{% endif %}">
   <img src="{{ url_for('adminlte_full.static', filename='/dist/img/AdminLTELogo.png') }}"
        alt="{{ config['ADMINLTE_BRAND_IMAGE_ALT'] }}"
        class="brand-image img-circle elevation-3"

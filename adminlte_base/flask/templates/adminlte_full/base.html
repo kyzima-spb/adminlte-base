@@ -2,11 +2,11 @@
 {% import "adminlte_full/macros.html" as adminlte_macro with context %}
 {% import 'adminlte_full/macros/markup.html' as html %}
 
-{% block body_attributes %} class="hold-transition {{ config['ADMINLTE_LAYOUT'] }}"{% endblock %}
+{% block body_attributes %} class="hold-transition {{ config['ADMINLTE_LAYOUT'] }}{% if config['ADMINLTE_ACCENT_COLOR'] %} accent-{{ config['ADMINLTE_ACCENT_COLOR'] }}{% endif %}"{% endblock %}
 
 {% block main %}
   <div class="wrapper">
-    <nav class="main-header navbar navbar-expand-md navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand-md {{ config['ADMINLTE_NAVBAR_COLOR'] | navbar_skin }}">
       {% block navbar_top %}
         {% if config['ADMINLTE_SIDEBAR_ENABLED'] %}
           <div class="navbar-nav navbar-no-expand order-1">
@@ -56,7 +56,7 @@
       {% endblock navbar_top %}
     </nav>
     {% if config['ADMINLTE_SIDEBAR_ENABLED'] %}
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <aside class="main-sidebar {{ config['ADMINLTE_SIDEBAR_COLOR'] | sidebar_skin(config['ADMINLTE_SIDEBAR_LIGHT']) }} elevation-4">
         {% with class_attr='brand-link' %}
           {% include 'adminlte_full/includes/brand_logo.html' %}
         {% endwith %}
@@ -108,7 +108,7 @@
     <footer class="main-footer">
       {% block main_footer %}
         <div class="float-right d-none d-sm-block">
-          <b>Version</b> 3.0.4
+          <b>Version</b> 3.0.5
         </div>
         <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io" target="_blank">AdminLTE.io</a>.</strong>
         <strong>Ported <a href="http://github.com/kyzima-spb" target="_blank">Kirill Vercetti</a>.</strong>
