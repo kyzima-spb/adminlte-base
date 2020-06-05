@@ -42,8 +42,6 @@ class ThemeColor(object):
     TEAL = 'teal'
     OLIVE = 'olive'
 
-    MUTED = 'muted'
-
     GRADIENT_PRIMARY = 'gradient-primary'
     GRADIENT_SUCCESS = 'gradient-success'
     GRADIENT_DANGER = 'gradient-danger'

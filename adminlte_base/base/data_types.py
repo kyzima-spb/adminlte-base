@@ -191,7 +191,7 @@ class Message(DropdownItem):
 
     __slots__ = ('sender', 'subject', 'sent_at')
 
-    def __init__(self, sender, subject, url, sent_at=None, icon='fas fa-star', color=ThemeColor.MUTED):
+    def __init__(self, sender, subject, url, sent_at=None, icon='fas fa-star', color=ThemeColor.SECONDARY):
         """
         Arguments:
             sender (mixed): the one who sent the message.
