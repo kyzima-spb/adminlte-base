@@ -33,14 +33,14 @@
       </div>
 
       {% block custom_links %}
-        {% if config['ADMINLTE_PASSWORD_RESET'] %}
+        {% if config.ADMINLTE_PASSWORD_RESET %}
           <p class="mb-1">
-            <a href="{{ config['ADMINLTE_PASSWORD_RESET_ENDPOINT'] }}">I forgot my password</a>
+            <a href="{{ config.ADMINLTE_PASSWORD_RESET_ENDPOINT }}">I forgot my password</a>
           </p>
         {% endif %}
-        {% if config['ADMINLTE_ALLOW_REGISTRATION'] %}
+        {% if config.ADMINLTE_ALLOW_REGISTRATION %}
           <p class="mb-0">
-            <a href="{{ config['ADMINLTE_REGISTRATION_ENDPOINT'] }}" class="text-center">Register a new membership</a>
+            <a href="{{ config.ADMINLTE_REGISTRATION_ENDPOINT }}" class="text-center">Register a new membership</a>
           </p>
         {% endif %}
       {% endblock %}
