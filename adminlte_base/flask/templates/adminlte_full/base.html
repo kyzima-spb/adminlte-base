@@ -2,13 +2,22 @@
 {% import "adminlte_full/macros.html" as adminlte_macro with context %}
 {% import 'adminlte_full/macros/markup.html' as html %}
 
-{% block body_attributes %} class="hold-transition {{ config['ADMINLTE_LAYOUT'] }}{% if config['ADMINLTE_ACCENT_COLOR'] %} accent-{{ config['ADMINLTE_ACCENT_COLOR'] }}{% endif %}"{% endblock %}
+{% block body_attributes %} class="
+  hold-transition
+  {{ config.ADMINLTE_LAYOUT }}
+  {{ config.ADMINLTE_ACCENT_COLOR|if_true(' accent-$value') }}
+  {{ config.ADMINLTE_BODY_SMALL_TEXT|if_true(' text-sm') }}
+"{% endblock %}
 
 {% block main %}
   <div class="wrapper">
-    <nav class="main-header navbar navbar-expand-md {{ config['ADMINLTE_NAVBAR_COLOR'] | navbar_skin }}">
+    <nav class="main-header navbar navbar-expand-md
+      {{ config.ADMINLTE_NAVBAR_COLOR|navbar_skin }}
+      {{ config.ADMINLTE_NAVBAR_NO_BORDER|if_true(' border-bottom-0') }}
+      {{ config.ADMINLTE_NAVBAR_SMALL_TEXT|if_true(' text-sm') }}
+    ">
       {% block navbar_top %}
-        {% if config['ADMINLTE_SIDEBAR_ENABLED'] %}
+        {% if config.ADMINLTE_SIDEBAR_ENABLED %}
           <div class="navbar-nav navbar-no-expand order-1">
             <a class="nav-item nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </div>
@@ -17,7 +26,7 @@
         <div class="collapse navbar-collapse order-3" id="navbarCollapse">
           <div class="order-2">
             {% block search_form %}
-              {% if config['ADMINLTE_SEARCH_ENABLED'] %}
+              {% if config.ADMINLTE_SEARCH_ENABLED %}
                 {{ html.navbar_search_form() }}
               {% endif %}
             {% endblock search_form %}
@@ -29,13 +38,13 @@
 
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
           {% block navbar_right %}
-            {% if config['ADMINLTE_MESSAGES_ENABLED'] %}
+            {% if config.ADMINLTE_MESSAGES_ENABLED %}
               {{ adminlte_macro.render_messages() }}
             {% endif %}
-            {% if config['ADMINLTE_NOTIFICATIONS_ENABLED'] %}
+            {% if config.ADMINLTE_NOTIFICATIONS_ENABLED %}
               {{ adminlte_macro.render_notifications() }}
             {% endif %}
-            {% if config['ADMINLTE_TASKS_ENABLED'] %}
+            {% if config.ADMINLTE_TASKS_ENABLED %}
               {{ adminlte_macro.render_tasks() }}
             {% endif %}
           {% endblock navbar_right %}
@@ -55,8 +64,8 @@
         </ul>
       {% endblock navbar_top %}
     </nav>
-    {% if config['ADMINLTE_SIDEBAR_ENABLED'] %}
-      <aside class="main-sidebar {{ config['ADMINLTE_SIDEBAR_COLOR'] | sidebar_skin(config['ADMINLTE_SIDEBAR_LIGHT']) }} elevation-4">
+    {% if config.ADMINLTE_SIDEBAR_ENABLED %}
+      <aside class="main-sidebar {{ config.ADMINLTE_SIDEBAR_COLOR | sidebar_skin(config.ADMINLTE_SIDEBAR_LIGHT) }} elevation-4">
         {% with class_attr='brand-link' %}
           {% include 'adminlte_full/includes/brand_logo.html' %}
         {% endwith %}
@@ -105,7 +114,7 @@
       {% endblock content_wrapper %}
     </div>
 
-    <footer class="main-footer">
+    <footer class="main-footer{{ config.ADMINLTE_FOOTER_SMALL_TEXT|if_true(' text-sm') }}">
       {% block main_footer %}
         <div class="float-right d-none d-sm-block">
           <b>Version</b> 3.0.5
