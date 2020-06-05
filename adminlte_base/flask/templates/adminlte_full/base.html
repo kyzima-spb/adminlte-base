@@ -17,7 +17,7 @@
       {{ config.ADMINLTE_NAVBAR_SMALL_TEXT|if_true(' text-sm') }}
     ">
       {% block navbar_top %}
-        {% if config.ADMINLTE_SIDEBAR_ENABLED %}
+        {% if config.ADMINLTE_MAIN_SIDEBAR_ENABLED %}
           <div class="navbar-nav navbar-no-expand order-1">
             <a class="nav-item nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </div>
@@ -54,17 +54,17 @@
               <i class="fas fa-caret-down"></i>
             </a>
           </li>
-          {#
-          <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-              <i class="fas fa-th-large"></i>
-            </a>
-          </li>
-          #}
+          {% if config.ADMINLTE_SECOND_SIDEBAR_ENABLED %}
+            <li class="nav-item">
+              <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                <i class="fas fa-th-large"></i>
+              </a>
+            </li>
+          {% endif %}
         </ul>
       {% endblock navbar_top %}
     </nav>
-    {% if config.ADMINLTE_SIDEBAR_ENABLED %}
+    {% if config.ADMINLTE_MAIN_SIDEBAR_ENABLED %}
       <aside class="main-sidebar {{ config.ADMINLTE_SIDEBAR_COLOR | sidebar_skin(config.ADMINLTE_SIDEBAR_LIGHT) }} elevation-4">
         {% with class_attr='brand-link' %}
           {% include 'adminlte_full/includes/brand_logo.html' %}
@@ -131,8 +131,10 @@
       {% endblock main_footer %}
     </footer>
 
-    <aside class="control-sidebar control-sidebar-dark">
-      {% block control_sidebar %}{% endblock control_sidebar %}
-    </aside>
+    {% if config.ADMINLTE_SECOND_SIDEBAR_ENABLED %}
+      <aside class="control-sidebar control-sidebar-{% if config.ADMINLTE_SIDEBAR_LIGHT %}light{% else %}dark{% endif %}">
+        {% block second_sidebar %}{% endblock second_sidebar %}
+      </aside>
+    {% endif %}
   </div>
 {% endblock main %}
