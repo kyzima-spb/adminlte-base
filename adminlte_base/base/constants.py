@@ -53,6 +53,7 @@ class ThemeColor(object):
 
 DEFAULT_SETTINGS = {
     'ADMINLTE_ACCENT_COLOR': None,
+    'ADMINLTE_BACK_TO_TOP_ENABLED': False,
     'ADMINLTE_BODY_SMALL_TEXT': False,
     'ADMINLTE_FOOTER_SMALL_TEXT': False,
     'ADMINLTE_LAYOUT': ThemeLayout.DEFAULT,

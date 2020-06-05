@@ -112,6 +112,12 @@
           {% endblock content %}
         </section>
       {% endblock content_wrapper %}
+
+      {% if config.ADMINLTE_BACK_TO_TOP_ENABLED %}
+        <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+          <i class="fas fa-chevron-up"></i>
+        </a>
+      {% endif %}
     </div>
 
     <footer class="main-footer{{ config.ADMINLTE_FOOTER_SMALL_TEXT|if_true(' text-sm') }}">
