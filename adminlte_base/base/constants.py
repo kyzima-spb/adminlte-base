@@ -5,13 +5,13 @@ Contains all the constant values used in the library.
 
 class ThemeLayout(object):
     """Layout Options"""
-    BOXED = 'sidebar-mini layout-boxed'
-    COLLAPSED_SIDEBAR = 'sidebar-mini sidebar-collapse'
-    DEFAULT = 'sidebar-mini'
-    FIXED_FOOTER = 'sidebar-mini layout-footer-fixed'
-    FIXED_SIDEBAR = 'sidebar-mini layout-fixed'
-    FIXED_TOPNAV = 'sidebar-mini layout-navbar-fixed' # fixme: sidebar height bug, wait...
-    TOP_NAV = 'sidebar-collapse layout-top-nav'
+    DEFAULT = frozenset({'sidebar-mini'})
+    BOXED = frozenset({'layout-boxed'}) # fixme: пропала тень справа
+    COLLAPSED_SIDEBAR = frozenset({'sidebar-collapse'})
+    FIXED_FOOTER = frozenset({'layout-footer-fixed'})
+    FIXED_SIDEBAR = frozenset({'layout-fixed'})
+    FIXED_TOP_NAV = frozenset({'layout-navbar-fixed'})
+    TOP_NAV = frozenset({'layout-top-nav'})
 
 
 class ThemeColor(object):

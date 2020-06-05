@@ -3,7 +3,7 @@
 
 {% block page_title %}DataTables{% endblock %}
 
-{% block content %}
+{% block page_content %}
   <div class="row">
     <div class="col-12">
       {% call widgets.render_card(title='DataTable with minimal features & hover style') %}
@@ -34,7 +34,7 @@
       {% endcall %}
     </div>
   </div>
-{% endblock content %}
+{% endblock %}
 
 {% block styles %}
   {{ super() }}

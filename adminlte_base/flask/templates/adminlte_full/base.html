@@ -2,9 +2,10 @@
 {% import "adminlte_full/macros.html" as adminlte_macro with context %}
 {% import 'adminlte_full/macros/markup.html' as html %}
 
+
 {% block body_attributes %} class="
   hold-transition
-  {{ config.ADMINLTE_LAYOUT }}
+  {{ config.ADMINLTE_LAYOUT|join(' ') }}
   {{ config.ADMINLTE_ACCENT_COLOR|if_true(' accent-$value') }}
   {{ config.ADMINLTE_BODY_SMALL_TEXT|if_true(' text-sm') }}
 "{% endblock %}
@@ -16,7 +17,14 @@
       {{ config.ADMINLTE_NAVBAR_NO_BORDER|if_true(' border-bottom-0') }}
       {{ config.ADMINLTE_NAVBAR_SMALL_TEXT|if_true(' text-sm') }}
     ">
+      {% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}<div class="container">{% endif %}
       {% block navbar_top %}
+        {% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}
+          {% with class_attr='navbar-brand' %}
+            {% include 'adminlte_full/includes/brand_logo.html' %}
+          {% endwith %}
+        {% endif %}
+
         {% if config.ADMINLTE_MAIN_SIDEBAR_ENABLED %}
           <div class="navbar-nav navbar-no-expand order-1">
             <a class="nav-item nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -63,9 +71,10 @@
           {% endif %}
         </ul>
       {% endblock navbar_top %}
+      {% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}</div>{% endif %}
     </nav>
     {% if config.ADMINLTE_MAIN_SIDEBAR_ENABLED %}
-      <aside class="main-sidebar {{ config.ADMINLTE_SIDEBAR_COLOR | sidebar_skin(config.ADMINLTE_SIDEBAR_LIGHT) }} elevation-4">
+      <aside class="main-sidebar elevation-4 {{ config.ADMINLTE_SIDEBAR_COLOR | sidebar_skin(config.ADMINLTE_SIDEBAR_LIGHT) }}">
         {% with class_attr='brand-link' %}
           {% include 'adminlte_full/includes/brand_logo.html' %}
         {% endwith %}
@@ -84,7 +93,7 @@
       {% block content_wrapper %}
         <section class="content-header">
           {% block content_header %}
-            <div class="container-fluid">
+            <div class="{% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}container{% else %}container-fluid{% endif %}">
               <div class="row mb-2">
                 <div class="col-sm-6">
                   <h1>{% block page_title %}Blank Page{% endblock %}</h1>
@@ -105,7 +114,7 @@
         </section>
         <section class="content">
           {% block content %}
-            <div class="container-fluid">
+            <div class="{% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}container{% else %}container-fluid{% endif %}">
               {{ adminlte_macro.render_flash_messages() }}
               {% block page_content %}{% endblock %}
             </div>
