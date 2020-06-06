@@ -2,6 +2,20 @@
 Contains all the constant values used in the library.
 """
 
+__all__ = (
+    'FlashMessageLevel', 'ThemeLayout', 'ThemeColor',
+)
+
+
+class FlashMessageLevel(object):
+    """Flash message levels"""
+    DEBUG = 'debug'
+    ERROR = 'error'
+    WARNING = 'warning'
+    INFO = 'info'
+    SUCCESS = 'success'
+    MESSAGE = 'message'
+
 
 class ThemeLayout(object):
     """Layout Options"""
@@ -94,24 +108,4 @@ DEFAULT_SETTINGS = {
     'ADMINLTE_SEARCH_ENDPOINT': 'search',
 
     'ADMINLTE_PROFILE_ENDPOINT': 'user.profile',
-}
-
-
-# Flash message levels
-DEBUG = 'debug'
-ERROR = 'error'
-WARNING = 'warning'
-INFO = 'info'
-SUCCESS = 'success'
-MESSAGE = 'message'
-
-
-# Flash message styles
-ALERTS = {
-    DEBUG: (ThemeColor.SECONDARY, 'fas fa-bug'),
-    ERROR: (ThemeColor.DANGER, 'fas fa-ban'),
-    WARNING: (ThemeColor.WARNING, 'fas fa-exclamation-triangle'),
-    INFO: (ThemeColor.INFO, 'fas fa-info'),
-    MESSAGE: (ThemeColor.INFO, 'fas fa-info'),
-    SUCCESS: (ThemeColor.SUCCESS, 'fas fa-check'),
 }

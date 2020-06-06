@@ -22,6 +22,10 @@ class AbstractManager(metaclass=ABCMeta):
     def create_url(self, endpoint, endpoint_args=None, endpoint_kwargs=None):
         """Creates and returns a URL using the address generation system of a specific framework."""
 
+    def get_flash_messages(self):
+        """Creates and returns all pop-up messages by category."""
+        raise NotImplementedError
+
     def get_incoming_messages(self, context=None):
         """Creates and returns a drop-down list of incoming messages."""
         if self._messages_callback is None:

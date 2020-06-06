@@ -4,8 +4,51 @@ Entities used in templates.
 
 from collections import OrderedDict
 from datetime import datetime
+from typing import NamedTuple
 
-from .constants import ThemeColor
+from .constants import ThemeColor, FlashMessageLevel
+
+
+class FlashedMessage(object):
+    """A message pop-up on the page."""
+
+    COLOR = {
+        FlashMessageLevel.DEBUG: ThemeColor.SECONDARY,
+        FlashMessageLevel.ERROR: ThemeColor.DANGER,
+        FlashMessageLevel.WARNING: ThemeColor.WARNING,
+        FlashMessageLevel.INFO: ThemeColor.INFO,
+        FlashMessageLevel.MESSAGE: ThemeColor.INFO,
+        FlashMessageLevel.SUCCESS: ThemeColor.SUCCESS,
+    }
+
+    ICONS = {
+        FlashMessageLevel.DEBUG: 'fas fa-bug',
+        FlashMessageLevel.ERROR: 'fas fa-ban',
+        FlashMessageLevel.WARNING: 'fas fa-exclamation-triangle',
+        FlashMessageLevel.INFO: 'fas fa-info',
+        FlashMessageLevel.MESSAGE: 'fas fa-info',
+        FlashMessageLevel.SUCCESS: 'fas fa-check',
+    }
+
+    def __init__(self, title, text, level=FlashMessageLevel.INFO, icon=None, color=None, message_class=''):
+        self.title = title
+        self.text = text
+        self.level = level
+        self._icon = icon
+        self._color = color
+        self.message_class = message_class
+
+    @property
+    def color(self):
+        if self._color is None:
+            self._color = self.COLOR.get(self.level)
+        return self._color
+
+    @property
+    def icon(self):
+        if self._icon is None:
+            self._icon = self.ICONS.get(self.level)
+        return self._icon
 
 
 class MenuItem(object):
