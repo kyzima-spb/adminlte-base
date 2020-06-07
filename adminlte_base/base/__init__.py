@@ -64,7 +64,7 @@ class AbstractManager(metaclass=ABCMeta):
                 id_item=i.get_id(),
                 title=i.get_title(),
                 url=i.get_url() or self.create_url(
-                    i.get_endpoint(), i.get_endpoint_args(), i.get_endpoint_kwargs()
+                    i.get_endpoint(), *i.get_endpoint_args(), **i.get_endpoint_kwargs()
                 ),
                 parent=menu.get_item(i.get_parent_id()),
                 item_type=i.get_type(),

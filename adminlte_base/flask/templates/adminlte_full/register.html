@@ -1,0 +1,45 @@
+{% extends "adminlte_full/skeleton_login.html" %}
+
+{% block page_title %}Registration{% endblock %}
+
+{% block messages %}
+  <p class="login-box-msg">Register a new membership</p>
+{% endblock messages %}
+
+{% block page_content %}
+  {% block form %}
+    <form action="{{ adminlte.create_url(config.ADMINLTE_REGISTRATION_ENDPOINT) }}" method="post">
+      {% block form_fields %}{% endblock form_fields %}
+      <div class="row">
+        <div class="col-8">
+          {% if config.ADMINLTE_TERMS_ENDPOINT %}
+            <div class="icheck-primary">
+              <input type="checkbox" name="agree_terms" id="agree_terms">
+              <label for="agree_terms">
+                I agree to the <a href="{{ adminlte.create_url(config.ADMINLTE_TERMS_ENDPOINT) }}">terms</a>
+              </label>
+            </div>
+          {% endif %}
+        </div>
+        <div class="col-4">
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </div>
+      </div>
+    </form>
+  {% endblock form %}
+
+  {% if config.ADMINLTE_ALLOW_SOCIAL_AUTH %}
+    <div class="social-auth-links text-center mb-3">
+      <p>- OR -</p>
+      {% include 'adminlte_full/includes/social_auth_links.html' %}
+    </div>
+  {% endif %}
+{% endblock page_content %}
+
+{% block custom_links %}
+  <p class="mb-0">
+    <a href="{{ adminlte.create_url(config.ADMINLTE_LOGIN_ENDPOINT) }}">
+      I already have a membership
+    </a>
+  </p>
+{% endblock custom_links %}
