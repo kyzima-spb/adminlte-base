@@ -170,6 +170,31 @@ class PageItem(object):
         return self.responsive_text
 
 
+class User(object):
+    def __init__(self, original, mapping=None):
+        self._original = original
+        self._mapping = mapping or {}
+
+    def __str__(self):
+        return str(self._original)
+
+    def _get_attr(self, name, default=None):
+        if name in self._mapping:
+            name = self._mapping.get(name)
+
+        value = getattr(self._original, name, default)
+
+        if callable(value):
+            value = value()
+
+        return value
+
+    __getattr__ = _get_attr
+
+    def get_full_name(self):
+        return self._get_attr('get_full_name', str(self))
+
+
 class Collection(object):
     def __init__(self):
         self.items = []
@@ -293,4 +318,5 @@ __all__ = (
     Message.__name__,
     Notification.__name__,
     Task.__name__,
+    User.__name__,
 )

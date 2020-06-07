@@ -6,6 +6,7 @@ from abc import ABCMeta, abstractmethod
 
 
 from .constants import *
+from .constants import DEFAULT_SETTINGS
 from .data_types import *
 from .exceptions import *
 from .mixins import *
@@ -17,9 +18,10 @@ class AbstractManager(metaclass=ABCMeta):
         self._messages_callback = None
         self._notifications_callback = None
         self._tasks_callback = None
+        self._user_callback = None
 
     @abstractmethod
-    def create_url(self, endpoint, endpoint_args=None, endpoint_kwargs=None):
+    def create_url(self, endpoint, *endpoint_args, **endpoint_kwargs):
         """Creates and returns a URL using the address generation system of a specific framework."""
 
     def get_flash_messages(self):
@@ -149,3 +151,23 @@ class AbstractManager(metaclass=ABCMeta):
 
     def static(self, filename):
         """Generates a URL to the given asset."""
+
+    @property
+    def user(self):
+        """Returns the current user if user_getter is set, otherwise returns None."""
+        if self._user_callback is None:
+            return None
+
+        return User(*self._user_callback())
+
+    def user_getter(self, callback):
+        """
+        This sets a callback to get the original user object.
+
+        Callback should return a user object and, optionally,
+        matching the properties of the original object with the properties of the facade.
+
+        Arguments:
+            callback (callable): callback to get the original user object.
+        """
+        self._user_callback = callback
