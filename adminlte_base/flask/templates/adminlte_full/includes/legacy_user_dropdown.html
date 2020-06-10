@@ -1,9 +1,9 @@
 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-  <a class="dropdown-item" href="{{ profile_url }}">
-    <i class="fas fa-user mr-2"></i> Profile
+  <a class="dropdown-item" href="{{ adminlte.create_url(config.ADMINLTE_PROFILE_ENDPOINT) }}">
+    <i class="fas fa-user mr-2"></i> {{ _('Profile') }}
   </a>
   <div class="dropdown-divider"></div>
-  <a class="dropdown-item" href="{{ url_for(config.ADMINLTE_LOGOUT_ENDPOINT) }}">
-    <i class="fas fa-sign-out-alt mr-2"></i> Log out
+  <a class="dropdown-item" href="{{ adminlte.create_url(config.ADMINLTE_LOGOUT_ENDPOINT) }}">
+    <i class="fas fa-sign-out-alt mr-2"></i> {{ _('Log out') }}
   </a>
 </div>

@@ -22,7 +22,7 @@
 
   <div class="card">
     <div class="card-body login-card-body">
-      {{ adminlte_macro.render_flash_messages() }}
+      {{ adminlte_markup.flash_messages(adminlte.get_flash_messages()) }}
       {% block messages %}{% endblock messages %}
       {% block page_content %}{% endblock page_content %}
       {% block custom_links %}{% endblock custom_links %}

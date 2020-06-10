@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AdminLTE-Full VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-06-09 04:11+0300\n"
+"POT-Creation-Date: 2020-06-10 18:37+0300\n"
 "PO-Revision-Date: 2020-06-08 19:19+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -35,6 +35,7 @@ msgstr "Сбросить пароль"
 
 #: adminlte_base/flask/templates/adminlte_full/forgot_password.html:26
 #: adminlte_base/flask/templates/adminlte_full/login.html:30
+#: adminlte_base/flask/templates/adminlte_full/macros/markup.html:36
 #: adminlte_base/flask/templates/adminlte_full/recover_password.html:36
 msgid "Log in"
 msgstr "Войти"
@@ -74,19 +75,23 @@ msgstr "Восстановление пароля"
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr "Пожалуйста, введите новый пароль дважды, чтобы мы могли убедиться, что вы ввели его верно."
+msgstr ""
+"Пожалуйста, введите новый пароль дважды, чтобы мы могли убедиться, что вы"
+" ввели его верно."
 
 #: adminlte_base/flask/templates/adminlte_full/recover_password.html:10
 msgid ""
 "The password reset link was invalid, possibly because it has already been"
 " used. Please request a new password reset."
-msgstr "Ссылка для сброса пароля недействительная, возможно, потому что она уже использовалась."
-" Пожалуйста, запросите новый пароль повторно."
+msgstr ""
+"Ссылка для сброса пароля недействительная, возможно, потому что она уже "
+"использовалась. Пожалуйста, запросите новый пароль повторно."
 
 #: adminlte_base/flask/templates/adminlte_full/recover_password.html:22
 msgid "Change my password"
 msgstr "Изменить пароль"
 
+#: adminlte_base/flask/templates/adminlte_full/macros/markup.html:40
 #: adminlte_base/flask/templates/adminlte_full/register.html:3
 #: adminlte_base/flask/templates/adminlte_full/register.html:26
 msgid "Registration"
@@ -100,4 +105,12 @@ msgstr "Я согласен с <a href=\"%(term_url)s\">условиями</a>"
 #: adminlte_base/flask/templates/adminlte_full/register.html:43
 msgid "I already have a membership"
 msgstr "У меня уже есть аккаунт"
+
+#: adminlte_base/flask/templates/adminlte_full/includes/legacy_user_dropdown.html:3
+msgid "Profile"
+msgstr "Профиль"
+
+#: adminlte_base/flask/templates/adminlte_full/includes/legacy_user_dropdown.html:7
+msgid "Log out"
+msgstr "Выйти"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AdminLTE-Full VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-06-09 04:11+0300\n"
+"POT-Creation-Date: 2020-06-10 18:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,7 @@ msgstr ""
 
 #: adminlte_base/flask/templates/adminlte_full/forgot_password.html:26
 #: adminlte_base/flask/templates/adminlte_full/login.html:30
+#: adminlte_base/flask/templates/adminlte_full/macros/markup.html:36
 #: adminlte_base/flask/templates/adminlte_full/recover_password.html:36
 msgid "Log in"
 msgstr ""
@@ -84,6 +85,7 @@ msgstr ""
 msgid "Change my password"
 msgstr ""
 
+#: adminlte_base/flask/templates/adminlte_full/macros/markup.html:40
 #: adminlte_base/flask/templates/adminlte_full/register.html:3
 #: adminlte_base/flask/templates/adminlte_full/register.html:26
 msgid "Registration"
@@ -96,5 +98,13 @@ msgstr ""
 
 #: adminlte_base/flask/templates/adminlte_full/register.html:43
 msgid "I already have a membership"
+msgstr ""
+
+#: adminlte_base/flask/templates/adminlte_full/includes/legacy_user_dropdown.html:3
+msgid "Profile"
+msgstr ""
+
+#: adminlte_base/flask/templates/adminlte_full/includes/legacy_user_dropdown.html:7
+msgid "Log out"
 msgstr ""
 
