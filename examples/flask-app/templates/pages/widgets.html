@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% import "adminlte_full/widgets.html" as widgets %}
+{% import 'adminlte_full/macros/bootstrap4.html' as bootstrap %}
+
+{% block breadcrumb %}
+  {{ super() }}
+  {{ bootstrap.breadcrumb(title='Widgets', is_active=True) }}
+{% endblock breadcrumb %}
 
 {% block page_title %}Widgets{% endblock %}
 

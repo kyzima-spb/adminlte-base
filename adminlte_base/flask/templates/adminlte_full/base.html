@@ -104,14 +104,9 @@
                   <h1>{% block page_title %}Blank Page{% endblock %}</h1>
                 </div>
                 <div class="col-sm-6">
-                  {% block breadcrumb %}
-                    {#
-                      <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
-                      </ol>
-                    #}
-                  {% endblock breadcrumb %}
+                  <ol class="breadcrumb float-sm-right" itemscope itemtype="http://schema.org/BreadcrumbList">
+                    {% block breadcrumb %}{% endblock breadcrumb %}
+                  </ol>
                 </div>
               </div>
             </div>

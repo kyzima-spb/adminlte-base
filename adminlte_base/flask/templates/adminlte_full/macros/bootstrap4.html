@@ -27,6 +27,32 @@
 {% endmacro %}
 
 
+{% macro breadcrumb(title='', url='', icon='', is_active=false, position=none) %}
+  {% set label|trim %}
+    {% if icon %}<i class="{{ icon }}"></i>{% endif %}
+    {% if title %}<span itemprop="name">{{ title|safe }}</span>{% endif %}
+  {% endset %}
+
+  {% if label and not url %}
+    {% set body = label %}
+  {% elif not label and not url %}
+    {% set body = caller() %}
+  {% else %}
+    {% set body %}<a itemprop="item" href="{{ url }}">{{ label }}</a>{% endset %}
+  {% endif %}
+
+  <li class="breadcrumb-item{{ is_active|if_true(' active') }}"
+      {% if is_active %} aria-current="page"{% endif %}
+      itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"
+  >
+    {{- body -}}
+    {%- if position -%}
+      <meta itemprop="position" content="{{ position }}">
+    {%- endif -%}
+  </li>
+{% endmacro %}
+
+
 {% macro render_pagination(pages, pagination_class='') %}
   <ul class="pagination{% if pagination_class %} {{ pagination_class }}{% endif %}">
     {% for item in pages %}
