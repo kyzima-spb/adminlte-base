@@ -5,13 +5,22 @@ A basic package to simplify the integration of AdminLTE with other frameworks.
 from abc import ABCMeta, abstractmethod
 
 from .constants import *
-from .constants import DEFAULT_SETTINGS
 from .data_types import *
 from .exceptions import *
 from .mixins import *
 
 
 class AbstractManager(metaclass=ABCMeta):
+    __slots__ = (
+        '_available_languages_callback',
+        '_locale_callback',
+        '_menu_callback',
+        '_messages_callback',
+        '_notifications_callback',
+        '_tasks_callback',
+        '_user_callback',
+    )
+
     def __init__(self):
         self._available_languages_callback = None
         self._locale_callback = None
@@ -37,6 +46,24 @@ class AbstractManager(metaclass=ABCMeta):
     @abstractmethod
     def create_url(self, endpoint, *endpoint_args, **endpoint_kwargs):
         """Creates and returns a URL using the address generation system of a specific framework."""
+
+    @property
+    def current_locale(self):
+        """Returns the current language code for current locale if `locale_getter` is set."""
+        if self._locale_callback is not None:
+            return self._locale_callback()
+
+    def current_locale_getter(self, callback):
+        """
+        This sets a callback function for current locale selection.
+
+        The default behaves as if a function was registered that returns `None` all the time.
+
+        Arguments:
+            callback (callable): the callback to get the current locale.
+        """
+        self._locale_callback = callback
+        return callback
 
     def get_available_languages(self, context=None):
         """Normalizes and returns a dictionary with a list of available languages."""
@@ -137,24 +164,6 @@ class AbstractManager(metaclass=ABCMeta):
 
         return tasks
 
-    @property
-    def current_locale(self):
-        """Returns the current language code for current locale if `locale_getter` is set."""
-        if self._locale_callback is not None:
-            return self._locale_callback()
-
-    def current_locale_getter(self, callback):
-        """
-        This sets a callback function for current locale selection.
-
-        The default behaves as if a function was registered that returns `None` all the time.
-
-        Arguments:
-            callback (callable): the callback to get the current locale.
-        """
-        self._locale_callback = callback
-        return callback
-
     def menu_loader(self, callback):
         """
         This sets the callback for loading a menu from the database or other source.
@@ -201,6 +210,7 @@ class AbstractManager(metaclass=ABCMeta):
 
     def static(self, filename):
         """Generates a URL to the given asset."""
+        raise NotImplementedError
 
     @property
     def user(self):

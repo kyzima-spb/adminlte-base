@@ -3,11 +3,11 @@ Contains all the constant values used in the library.
 """
 
 __all__ = (
-    'FlashMessageLevel', 'ThemeLayout', 'ThemeColor',
+    'FlashedMessageLevel', 'ThemeLayout', 'ThemeColor', 'DEFAULT_SETTINGS',
 )
 
 
-class FlashMessageLevel(object):
+class FlashedMessageLevel(object):
     """Flash message levels"""
     DEBUG = 'debug'
     ERROR = 'error'

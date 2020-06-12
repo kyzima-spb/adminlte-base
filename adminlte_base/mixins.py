@@ -2,6 +2,10 @@
 Mixins to create your own entity classes.
 """
 
+__all__ = (
+    'MenuItemMixin', 'MenuMixin',
+)
+
 
 class MenuItemMixin(object):
     """Mixin for the database model, which describes the menu item."""
@@ -65,9 +69,3 @@ class MenuMixin(object):
     def get_title(self):
         """Returns the title of the menu."""
         return self.title
-
-
-__all__ = (
-    MenuItemMixin.__name__,
-    MenuMixin.__name__,
-)

@@ -16,9 +16,9 @@
       {{ config.ADMINLTE_NAVBAR_NO_BORDER|if_true(' border-bottom-0') }}
       {{ config.ADMINLTE_NAVBAR_SMALL_TEXT|if_true(' text-sm') }}
     ">
-      {% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}<div class="container">{% endif %}
+      {% if ThemeLayout.TOP_NAV <= config.ADMINLTE_LAYOUT %}<div class="container">{% endif %}
       {% block navbar_top %}
-        {% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}
+        {% if ThemeLayout.TOP_NAV <= config.ADMINLTE_LAYOUT %}
           {% with class_attr='navbar-brand' %}
             {% include 'adminlte_full/includes/brand_logo.html' %}
           {% endwith %}
@@ -75,7 +75,7 @@
           {% endif %}
         </ul>
       {% endblock navbar_top %}
-      {% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}</div>{% endif %}
+      {% if ThemeLayout.TOP_NAV <= config.ADMINLTE_LAYOUT %}</div>{% endif %}
     </nav>
     {% if config.ADMINLTE_MAIN_SIDEBAR_ENABLED %}
       <aside class="main-sidebar elevation-4 {{ config.ADMINLTE_SIDEBAR_COLOR | sidebar_skin(config.ADMINLTE_SIDEBAR_LIGHT) }}">
@@ -101,7 +101,7 @@
       {% block content_wrapper %}
         <section class="content-header">
           {% block content_header %}
-            <div class="{% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}container{% else %}container-fluid{% endif %}">
+            <div class="{% if ThemeLayout.TOP_NAV <= config.ADMINLTE_LAYOUT %}container{% else %}container-fluid{% endif %}">
               <div class="row mb-2">
                 <div class="col-sm-6">
                   <h1>{% block page_title %}Blank Page{% endblock %}</h1>
@@ -117,7 +117,7 @@
         </section>
         <section class="content">
           {% block content %}
-            <div class="{% if THEME_LAYOUT.TOP_NAV <= config.ADMINLTE_LAYOUT %}container{% else %}container-fluid{% endif %}">
+            <div class="{% if ThemeLayout.TOP_NAV <= config.ADMINLTE_LAYOUT %}container{% else %}container-fluid{% endif %}">
               {{ adminlte_markup.flash_messages(adminlte.get_flash_messages()) }}
               {% block page_content %}{% endblock %}
             </div>
