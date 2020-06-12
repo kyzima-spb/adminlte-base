@@ -4,7 +4,6 @@ A basic package to simplify the integration of AdminLTE with other frameworks.
 
 from abc import ABCMeta, abstractmethod
 
-
 from .constants import *
 from .constants import DEFAULT_SETTINGS
 from .data_types import *
@@ -14,15 +13,45 @@ from .mixins import *
 
 class AbstractManager(metaclass=ABCMeta):
     def __init__(self):
+        self._available_languages_callback = None
+        self._locale_callback = None
         self._menu_callback = None
         self._messages_callback = None
         self._notifications_callback = None
         self._tasks_callback = None
         self._user_callback = None
 
+    def available_languages_loader(self, callback):
+        """
+        This sets the callback for loading available languages.
+
+        Arguments:
+            callback (callable): callback to get available languages.
+
+        Returns:
+            a menu object, or ``None`` if the menu does not exist.
+        """
+        self._available_languages_callback = callback
+        return callback
+
     @abstractmethod
     def create_url(self, endpoint, *endpoint_args, **endpoint_kwargs):
         """Creates and returns a URL using the address generation system of a specific framework."""
+
+    def get_available_languages(self, context=None):
+        """Normalizes and returns a dictionary with a list of available languages."""
+        if self._available_languages_callback is None:
+            raise exceptions.Error('Missing available_languages_loader.')
+
+        if context is None:
+            languages = self._available_languages_callback()
+        else:
+            languages = self._available_languages_callback(context)
+
+        if isinstance(languages, dict):
+            languages = languages.items()
+
+        return languages
 
     def get_flash_messages(self):
         """Creates and returns all pop-up messages by category."""
@@ -108,6 +137,24 @@ class AbstractManager(metaclass=ABCMeta):
 
         return tasks
 
+    @property
+    def current_locale(self):
+        """Returns the current language code for current locale if `locale_getter` is set."""
+        if self._locale_callback is not None:
+            return self._locale_callback()
+
+    def current_locale_getter(self, callback):
+        """
+        This sets a callback function for current locale selection.
+
+        The default behaves as if a function was registered that returns `None` all the time.
+
+        Arguments:
+            callback (callable): the callback to get the current locale.
+        """
+        self._locale_callback = callback
+        return callback
+
     def menu_loader(self, callback):
         """
         This sets the callback for loading a menu from the database or other source.
@@ -127,27 +174,30 @@ class AbstractManager(metaclass=ABCMeta):
         This sets the callback for loading a messages from the database or other source.
 
         Arguments:
-            callback (callable): the callback for retrieving a menu object.
+            callback (callable): callback to receive incoming messages.
         """
         self._messages_callback = callback
+        return callback
 
     def notifications_loader(self, callback):
         """
         This sets the callback for loading a notifications from the database or other source.
 
         Arguments:
-            callback (callable): the callback for retrieving a menu object.
+            callback (callable): callback to receive notifications.
         """
         self._notifications_callback = callback
+        return callback
 
     def tasks_loader(self, callback):
         """
         This sets the callback for loading a tasks from the database or other source.
 
         Arguments:
-            callback (callable): the callback for retrieving a menu object.
+            callback (callable): callback to receive tasks.
         """
         self._tasks_callback = callback
+        return callback
 
     def static(self, filename):
         """Generates a URL to the given asset."""
@@ -171,3 +221,4 @@ class AbstractManager(metaclass=ABCMeta):
             callback (callable): callback to get the original user object.
         """
         self._user_callback = callback
+        return callback

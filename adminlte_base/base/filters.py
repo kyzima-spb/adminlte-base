@@ -16,6 +16,15 @@ def humanize(dt, locale='en_us', time_zone=None):
     return dt.humanize(locale=locale, only_distance=True)
 
 
+def replace_with_flag(locale):
+    locale = locale.replace('-', '_').lower().rsplit('_', maxsplit=1)
+
+    if len(locale) == 2:
+        return f'flag-icon flag-icon-{locale[-1]}'
+
+    return ''
+
+
 def navbar_skin(color):
     """Returns a collection of classes to style the navigation bar."""
     if color:
@@ -48,4 +57,5 @@ __all__ = (
     navbar_skin.__name__,
     sidebar_skin.__name__,
     if_true.__name__,
+    replace_with_flag.__name__,
 )

@@ -54,6 +54,9 @@
             {% if config.ADMINLTE_TASKS_ENABLED %}
               {{ adminlte_markup.tasks_menu(adminlte.get_tasks()) }}
             {% endif %}
+            {% if adminlte.current_locale %}
+              {{ adminlte_markup.language_dropdown_menu(adminlte.current_locale, adminlte.get_available_languages()) }}
+            {% endif %}
           {% endblock navbar_right %}
           {% if adminlte.user %}
             {{ adminlte_markup.legacy_user_menu(adminlte.user) }}
