@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% import "adminlte_full/widgets.html" as widgets %}
+{% import "adminlte_full/macros/widgets.html" as widgets %}
 
-{% block page_title %}Search Results{% endblock %}
+{% block page_title %}{{ _('Search Results') }}{% endblock %}
 
 {% block content %}
   {% call widgets.render_card(title='Found 0 results', color=THEME_COLOR.PRIMARY) %}
