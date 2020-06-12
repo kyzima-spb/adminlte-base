@@ -13,7 +13,7 @@
       </h3>
       <p>{{ details | default('We will work on fixing that right away.') | safe }}</p>
       {% if config.ADMINLTE_SEARCH_ENABLED %}
-        <form class="search-form" action="{{ url_for(config.ADMINLTE_SEARCH_ENDPOINT) }}" method="get">
+        <form class="search-form" action="{{ adminlte.create_url(config.ADMINLTE_SEARCH_ENDPOINT) }}" method="get">
           <div class="input-group">
             <input type="search" name="q" class="form-control" placeholder="Search" aria-label="Search">
             <div class="input-group-append">

@@ -5,7 +5,7 @@
 
 {% block styles %}
   {{ super() }}
-  <link rel="stylesheet" href="{{ url_for('adminlte_full.static', filename='plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ adminlte.static('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
 {% endblock %}
 
 {% block body %}
