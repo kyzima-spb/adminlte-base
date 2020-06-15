@@ -8,6 +8,12 @@ from ..data_types import MenuItem
 from ..mixins import MenuItemMixin, MenuMixin
 
 
+__all__ = (
+    'create_entity_menu',
+    'create_entity_menu_item',
+)
+
+
 def before_insert(self):
     if not (bool(self.url) ^ bool(self.endpoint)):
         raise TypeError('You need to set the value of only one of the arguments: url or endpoint.')
@@ -69,9 +75,3 @@ def create_entity_menu(db, attributes=None, mixin=None):
         base = (db.Entity, mixin, MenuMixin)
 
     return type('Menu', base, attributes)
-
-
-__all__ = (
-    create_entity_menu.__name__,
-    create_entity_menu_item.__name__,
-)

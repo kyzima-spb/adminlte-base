@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AdminLTE-Full VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-06-10 18:37+0300\n"
+"POT-Creation-Date: 2020-06-15 16:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,93 +18,101 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: adminlte_base/flask/templates/adminlte_full/forgot_password.html:3
+#: adminlte_base/templates/adminlte_full/forgot_password.html:3
 msgid "Password Reset"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/forgot_password.html:7
+#: adminlte_base/templates/adminlte_full/forgot_password.html:7
 msgid "You forgot your password? Here you can easily retrieve a new password."
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/forgot_password.html:17
-#: adminlte_base/flask/templates/adminlte_full/recover_password.html:29
+#: adminlte_base/templates/adminlte_full/forgot_password.html:17
+#: adminlte_base/templates/adminlte_full/recover_password.html:29
 msgid "Reset my password"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/forgot_password.html:26
-#: adminlte_base/flask/templates/adminlte_full/login.html:30
-#: adminlte_base/flask/templates/adminlte_full/macros/markup.html:36
-#: adminlte_base/flask/templates/adminlte_full/recover_password.html:36
+#: adminlte_base/templates/adminlte_full/forgot_password.html:26
+#: adminlte_base/templates/adminlte_full/login.html:30
+#: adminlte_base/templates/adminlte_full/macros/markup.html:36
+#: adminlte_base/templates/adminlte_full/recover_password.html:36
 msgid "Log in"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/forgot_password.html:31
-#: adminlte_base/flask/templates/adminlte_full/login.html:55
-#: adminlte_base/flask/templates/adminlte_full/register.html:6
+#: adminlte_base/templates/adminlte_full/forgot_password.html:31
+#: adminlte_base/templates/adminlte_full/login.html:55
+#: adminlte_base/templates/adminlte_full/register.html:6
 msgid "Register a new membership"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/login.html:3
+#: adminlte_base/templates/adminlte_full/login.html:3
 msgid "Login"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/login.html:12
+#: adminlte_base/templates/adminlte_full/login.html:12
 msgid "Sign in to start your session"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/login.html:25
+#: adminlte_base/templates/adminlte_full/login.html:25
 msgid "Remember Me"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/login.html:38
-#: adminlte_base/flask/templates/adminlte_full/register.html:34
+#: adminlte_base/templates/adminlte_full/login.html:38
+#: adminlte_base/templates/adminlte_full/register.html:37
 msgid "- OR -"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/login.html:48
+#: adminlte_base/templates/adminlte_full/login.html:48
 msgid "Forgotten your password or username?"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/recover_password.html:3
+#: adminlte_base/templates/adminlte_full/recover_password.html:3
 msgid "Recover Password"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/recover_password.html:8
+#: adminlte_base/templates/adminlte_full/recover_password.html:8
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/recover_password.html:10
+#: adminlte_base/templates/adminlte_full/recover_password.html:10
 msgid ""
 "The password reset link was invalid, possibly because it has already been"
 " used. Please request a new password reset."
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/recover_password.html:22
+#: adminlte_base/templates/adminlte_full/recover_password.html:22
 msgid "Change my password"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/macros/markup.html:40
-#: adminlte_base/flask/templates/adminlte_full/register.html:3
-#: adminlte_base/flask/templates/adminlte_full/register.html:26
+#: adminlte_base/templates/adminlte_full/macros/markup.html:40
+#: adminlte_base/templates/adminlte_full/register.html:3
+#: adminlte_base/templates/adminlte_full/register.html:29
 msgid "Registration"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/register.html:20
+#: adminlte_base/templates/adminlte_full/register.html:20
 #, python-format
 msgid "I agree to the <a href=\"%(term_url)s\">terms</a>"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/register.html:43
+#: adminlte_base/templates/adminlte_full/register.html:23
+msgid "You must agree to the terms."
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/register.html:46
 msgid "I already have a membership"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/includes/legacy_user_dropdown.html:3
+#: adminlte_base/templates/adminlte_full/search_results.html:4
+msgid "Search Results"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/includes/legacy_user_dropdown.html:3
 msgid "Profile"
 msgstr ""
 
-#: adminlte_base/flask/templates/adminlte_full/includes/legacy_user_dropdown.html:7
+#: adminlte_base/templates/adminlte_full/includes/legacy_user_dropdown.html:7
 msgid "Log out"
 msgstr ""
 

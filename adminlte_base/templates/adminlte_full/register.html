@@ -14,11 +14,14 @@
         <div class="col-7">
           {% if config.ADMINLTE_TERMS_ENDPOINT %}
             <div class="icheck-primary">
-              <input type="checkbox" name="agree_terms" id="agree_terms">
+              <input class="{{ form.agree_terms.errors|if_true(' is-invalid') }}" type="checkbox" name="agree_terms" id="agree_terms">
               <label for="agree_terms">
                 {% set term_url = adminlte.create_url(config.ADMINLTE_TERMS_ENDPOINT) %}
                 {{ _('I agree to the <a href="%(term_url)s">terms</a>', term_url=term_url) }}
               </label>
+              <div class="invalid-feedback">
+                <p>{{ _('You must agree to the terms.') }}</p>
+              </div>
             </div>
           {% endif %}
         </div>

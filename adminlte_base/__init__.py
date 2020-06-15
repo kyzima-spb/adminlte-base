@@ -65,7 +65,7 @@ class AbstractManager(metaclass=ABCMeta):
         self._locale_callback = callback
         return callback
 
-    def get_available_languages(self, context=None):
+    def get_available_languages(self, context=None, as_dict=False):
         """Normalizes and returns a dictionary with a list of available languages."""
         if self._available_languages_callback is None:
             raise exceptions.Error('Missing available_languages_loader.')
@@ -77,6 +77,9 @@ class AbstractManager(metaclass=ABCMeta):
 
         if isinstance(languages, dict):
             languages = languages.items()
+
+        if as_dict:
+            return {locale: name for locale, name in languages}
 
         return languages
 
