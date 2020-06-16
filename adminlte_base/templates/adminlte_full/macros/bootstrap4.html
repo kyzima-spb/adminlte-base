@@ -1,5 +1,9 @@
-{% macro field(field, form_group_class='form-group', placeholder='', addon_after=None) %}
+{% macro field(field, form_group_class='form-group', placeholder='', addon_after=None, show_label=true) %}
   <div class="{{ form_group_class }}">
+    {% if show_label %}
+      {{ field.label }}
+    {% endif %}
+
     {%- if field.errors %}
       {% set valid_class='is-invalid' %}
     {%- else %}
@@ -7,6 +11,18 @@
     {% endif -%}
 
     {{ field(class="form-control " + valid_class, placeholder=placeholder) }}
+
+    {% if field.description %}
+      {% if field.description is iterable and field.description is not string %}
+        <ul class="form-text text-muted text-sm">
+          {% for i in field.description %}
+            <li>{{ i }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <small class="form-text text-muted">{{ field.description }}</small>
+      {% endif %}
+    {% endif %}
 
     {%- if addon_after %}
       <div class="input-group-append">
