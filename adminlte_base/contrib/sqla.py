@@ -43,7 +43,7 @@ class MenuMixin(_MenuMixin):
 
     @declared_attr
     def items(cls):
-        return relationship('MenuItem', backref='menu')
+        return relationship('MenuItem', backref='menu', lazy='joined')
 
 
 def create_entity_menu_item(db):
