@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AdminLTE-Full VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-06-15 16:12+0300\n"
+"POT-Creation-Date: 2020-06-17 18:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
+
+#: adminlte_base/templates/adminlte_full/change_password.html:5
+#: adminlte_base/templates/adminlte_full/change_password.html:9
+#: adminlte_base/templates/adminlte_full/change_password.html:28
+#: adminlte_base/templates/adminlte_full/includes/legacy_user_dropdown.html:6
+#: adminlte_base/templates/adminlte_full/recover_password.html:22
+msgid "Change my password"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/change_password.html:17
+#, python-format
+msgid "Enter a new password for the user <strong>%(username)s</strong>."
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/change_password.html:19
+msgid "Enter a new password"
+msgstr ""
 
 #: adminlte_base/templates/adminlte_full/forgot_password.html:3
 msgid "Password Reset"
@@ -32,36 +49,60 @@ msgid "Reset my password"
 msgstr ""
 
 #: adminlte_base/templates/adminlte_full/forgot_password.html:26
-#: adminlte_base/templates/adminlte_full/login.html:30
+#: adminlte_base/templates/adminlte_full/lockscreen.html:16
+#: adminlte_base/templates/adminlte_full/login.html:33
 #: adminlte_base/templates/adminlte_full/macros/markup.html:36
 #: adminlte_base/templates/adminlte_full/recover_password.html:36
 msgid "Log in"
 msgstr ""
 
 #: adminlte_base/templates/adminlte_full/forgot_password.html:31
-#: adminlte_base/templates/adminlte_full/login.html:55
-#: adminlte_base/templates/adminlte_full/register.html:6
+#: adminlte_base/templates/adminlte_full/login.html:58
+#: adminlte_base/templates/adminlte_full/register.html:7
 msgid "Register a new membership"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/login.html:3
+#: adminlte_base/templates/adminlte_full/lockscreen.html:3
+msgid "Lockscreen"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/lockscreen.html:20
+#: adminlte_base/templates/adminlte_full/macros/markup.html:40
+#: adminlte_base/templates/adminlte_full/register.html:4
+#: adminlte_base/templates/adminlte_full/register.html:33
+msgid "Registration"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/lockscreen.html:34
+msgid "Password"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/lockscreen.html:44
+msgid "Enter your password to retrieve your session"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/lockscreen.html:47
+msgid "Or sign in as a different user"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/login.html:4
 msgid "Login"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/login.html:12
+#: adminlte_base/templates/adminlte_full/login.html:13
 msgid "Sign in to start your session"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/login.html:25
+#: adminlte_base/templates/adminlte_full/login.html:28
 msgid "Remember Me"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/login.html:38
-#: adminlte_base/templates/adminlte_full/register.html:37
+#: adminlte_base/templates/adminlte_full/login.html:41
+#: adminlte_base/templates/adminlte_full/register.html:41
 msgid "- OR -"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/login.html:48
+#: adminlte_base/templates/adminlte_full/login.html:51
 msgid "Forgotten your password or username?"
 msgstr ""
 
@@ -81,26 +122,16 @@ msgid ""
 " used. Please request a new password reset."
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/recover_password.html:22
-msgid "Change my password"
-msgstr ""
-
-#: adminlte_base/templates/adminlte_full/macros/markup.html:40
-#: adminlte_base/templates/adminlte_full/register.html:3
-#: adminlte_base/templates/adminlte_full/register.html:29
-msgid "Registration"
-msgstr ""
-
-#: adminlte_base/templates/adminlte_full/register.html:20
+#: adminlte_base/templates/adminlte_full/register.html:24
 #, python-format
 msgid "I agree to the <a href=\"%(term_url)s\">terms</a>"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/register.html:23
+#: adminlte_base/templates/adminlte_full/register.html:27
 msgid "You must agree to the terms."
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/register.html:46
+#: adminlte_base/templates/adminlte_full/register.html:50
 msgid "I already have a membership"
 msgstr ""
 
@@ -112,7 +143,7 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/includes/legacy_user_dropdown.html:7
+#: adminlte_base/templates/adminlte_full/includes/legacy_user_dropdown.html:10
 msgid "Log out"
 msgstr ""
 
