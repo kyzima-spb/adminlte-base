@@ -6,6 +6,7 @@ from abc import ABCMeta, abstractmethod
 
 from .constants import *
 from .data_types import *
+from .decorators import *
 from .exceptions import *
 from .mixins import *
 
@@ -65,22 +66,26 @@ class MenuLoader(metaclass=ABCMeta):
 class AbstractManager(metaclass=ABCMeta):
     __slots__ = (
         '_available_languages_callback',
+        '_home_page_callback',
         '_locale_callback',
         '_menu_loader',
         '_messages_callback',
         '_notifications_callback',
         '_tasks_callback',
         '_user_callback',
+        'home_page',
     )
 
     def __init__(self):
         self._available_languages_callback = None
+        self._home_page_callback = None
         self._locale_callback = None
         self._menu_loader = None
         self._messages_callback = None
         self._notifications_callback = None
         self._tasks_callback = None
         self._user_callback = None
+        self.home_page = None
 
     def available_languages_loader(self, callback):
         """
@@ -94,6 +99,17 @@ class AbstractManager(metaclass=ABCMeta):
         """
         self._available_languages_callback = callback
         return callback
+
+    @return_namedtuple('HomeUrl', 'url', 'title')
+    def get_home_page(self):
+        """Returns a link to the home page as a named tuple with url and title fields."""
+        if self._home_page_callback is not None:
+            return self._home_page_callback()
+
+        if self.home_page is None:
+            self.home_page = ('/', 'Home')
+
+        return self.home_page
 
     @abstractmethod
     def create_url(self, endpoint, *endpoint_args, **endpoint_kwargs):
@@ -184,6 +200,16 @@ class AbstractManager(metaclass=ABCMeta):
                 f'{type(tasks).__name__} unsupported return type for tasks_loader; Dropdown required.')
 
         return tasks
+
+    def home_page_getter(self, callback):
+        """
+        This sets a callback to get the home page.
+
+        Arguments:
+            callback (callable): callback to get the home page.
+        """
+        self._home_page_callback = callback
+        return callback
 
     @property
     def menu(self):
