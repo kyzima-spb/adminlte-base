@@ -15,10 +15,12 @@ setup(
     name='adminlte-base',
     use_scm_version={
         'relative_to': __file__,
+        'local_scheme': lambda version: '',
     },
-    url='https://github.com/kyzima-spb/adminlte-base',
     description='A basic package to simplify the integration of AdminLTE with other frameworks.',
     long_description=readme,
+    url='https://github.com/kyzima-spb/adminlte-base',
+    license='MIT',
     author='Kirill Vercetti',
     author_email='office@kyzima-spb.com',
     packages=find_packages(),
