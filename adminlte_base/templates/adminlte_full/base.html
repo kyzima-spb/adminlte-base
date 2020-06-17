@@ -39,7 +39,12 @@
             {% endblock search_form %}
           </div>
           <ul class="navbar-nav order-1">
-            {% block navbar_left %}{% endblock navbar_left %}
+            {% block navbar_left %}
+              {% set navbar_menu = adminlte.menu.navbar_menu() %}
+              {% if navbar_menu %}
+                {{ adminlte_markup.navbar_menu(navbar_menu) }}
+              {% endif %}
+            {% endblock navbar_left %}
           </ul>
         </div>
 
@@ -90,7 +95,12 @@
               {% endwith %}
             {% endif %}
             <nav class="mt-2">
-              {% block sidebar_nav %}{% endblock sidebar_nav %}
+              {% block sidebar_nav %}
+                {% set sidebar_menu = adminlte.menu.sidebar_menu() %}
+                {% if sidebar_menu %}
+                  {{ adminlte_markup.sidebar_menu(sidebar_menu) }}
+                {% endif %}
+              {% endblock sidebar_nav %}
             </nav>
           {% endblock sidebar %}
         </div>
@@ -145,7 +155,7 @@
 
     {% if config.ADMINLTE_SECOND_SIDEBAR_ENABLED %}
       <aside class="control-sidebar control-sidebar-{% if config.ADMINLTE_SIDEBAR_LIGHT %}light{% else %}dark{% endif %}">
-        {% block second_sidebar %}{% endblock second_sidebar %}
+        {% include 'includes/second_sidebar.html' %}
       </aside>
     {% endif %}
   </div>

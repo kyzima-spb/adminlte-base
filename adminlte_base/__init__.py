@@ -10,11 +10,63 @@ from .exceptions import *
 from .mixins import *
 
 
+class MenuLoader(metaclass=ABCMeta):
+    __slots__ = ('manager',)
+
+    def __init__(self, manager):
+        self.manager = manager
+
+    def _create(self, data, active_path=None):
+        """Creates and returns a menu object."""
+        menu = Menu()
+        items = sorted(
+            data.get_items(),
+            key=lambda v: (v.get_parent_id() or 0, v.get_pos(), v.get_id())
+        )
+
+        for i in items:
+            menu.add_item(MenuItem(
+                id_item=i.get_id(),
+                title=i.get_title(),
+                url=i.get_url() or self.manager.create_url(
+                    i.get_endpoint(), *i.get_endpoint_args(), **i.get_endpoint_kwargs()
+                ),
+                parent=menu.get_item(i.get_parent_id()),
+                item_type=i.get_type(),
+                icon=i.get_icon(),
+                help=i.get_hint()
+            ))
+
+        if active_path is not None:
+            menu.activate_by_path(active_path)
+
+        return menu
+
+    def get(self, program_name, active_path=None):
+        """Creates and returns a menu with the specified program name."""
+        data = self.load(program_name)
+
+        if data is None:
+            raise exceptions.MenuNotFound(program_name)
+
+        return self._create(data, active_path)
+
+    @abstractmethod
+    def load(self, program_name):
+        """Returns data for building a menu from an external source."""
+
+    def navbar_menu(self, active_path=None):
+        """Creates and returns a navbar menu."""
+
+    def sidebar_menu(self, active_path=None):
+        """Creates and returns a sidebar menu."""
+
+
 class AbstractManager(metaclass=ABCMeta):
     __slots__ = (
         '_available_languages_callback',
         '_locale_callback',
-        '_menu_callback',
+        '_menu_loader',
         '_messages_callback',
         '_notifications_callback',
         '_tasks_callback',
@@ -24,7 +76,7 @@ class AbstractManager(metaclass=ABCMeta):
     def __init__(self):
         self._available_languages_callback = None
         self._locale_callback = None
-        self._menu_callback = None
+        self._menu_loader = None
         self._messages_callback = None
         self._notifications_callback = None
         self._tasks_callback = None
@@ -102,40 +154,6 @@ class AbstractManager(metaclass=ABCMeta):
 
         return messages
 
-    def get_menu(self, program_name, active_path=None):
-        """Creates and returns a menu with the specified program name."""
-        if self._menu_callback is None:
-            raise exceptions.Error('Missing menu_loader.')
-
-        data = self._menu_callback(program_name)
-
-        if data is None:
-            raise exceptions.MenuNotFound(program_name)
-
-        menu = Menu()
-        items = sorted(
-            data.get_items(),
-            key=lambda v: (v.get_parent_id() or 0, v.get_pos(), v.get_id())
-        )
-
-        for i in items:
-            menu.add_item(MenuItem(
-                id_item=i.get_id(),
-                title=i.get_title(),
-                url=i.get_url() or self.create_url(
-                    i.get_endpoint(), *i.get_endpoint_args(), **i.get_endpoint_kwargs()
-                ),
-                parent=menu.get_item(i.get_parent_id()),
-                item_type=i.get_type(),
-                icon=i.get_icon(),
-                help=i.get_hint()
-            ))
-
-        if active_path is not None:
-            menu.activate_by_path(active_path)
-
-        return menu
-
     def get_notifications(self, context=None):
         """Creates and returns a drop-down list of notifications."""
         if self._notifications_callback is None:
@@ -167,19 +185,23 @@ class AbstractManager(metaclass=ABCMeta):
 
         return tasks
 
-    def menu_loader(self, callback):
+    @property
+    def menu(self):
+        """The loader for retrieving a menu object."""
+        if self._menu_loader is None:
+            raise exceptions.Error('Missing menu_loader.')
+        return self._menu_loader(self)
+
+    def menu_loader(self, loader: MenuLoader):
         """
         This sets the callback for loading a menu from the database or other source.
         The function you set should take a menu ID or program name.
 
         Arguments:
-            callback (callable): the callback for retrieving a menu object.
-
-        Returns:
-            a menu object, or ``None`` if the menu does not exist.
+            loader (MenuLoader): the loader for retrieving a menu object.
         """
-        self._menu_callback = callback
-        return callback
+        self._menu_loader = loader
+        return loader
 
     def messages_loader(self, callback):
         """

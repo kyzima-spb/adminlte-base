@@ -1,4 +1,5 @@
 {% extends "adminlte_full/skeleton_login.html" %}
+{% import "adminlte_full/macros/bootstrap4.html" as bootstrap %}
 
 {% block page_title %}{{ _('Registration') }}{% endblock %}
 
@@ -9,7 +10,10 @@
 {% block page_content %}
   {% block form %}
     <form action="{{ adminlte.create_url(config.ADMINLTE_REGISTRATION_ENDPOINT) }}" method="post">
-      {% block form_fields %}{% endblock form_fields %}
+      {% block form_fields %}
+        {{ bootstrap.form_fields(form, form_group_class='input-group mb-3',
+                                 show_label=false, placeholder=true, exclude=['agree_terms']) }}
+      {% endblock form_fields %}
       <div class="row">
         <div class="col-7">
           {% if config.ADMINLTE_TERMS_ENDPOINT %}
@@ -35,13 +39,13 @@
   {% if config.ADMINLTE_ALLOW_SOCIAL_AUTH %}
     <div class="social-auth-links text-center mb-3">
       <p>{{ _('- OR -') }}</p>
-      {% include 'adminlte_full/includes/social_auth_links.html' %}
+      {% include 'includes/social_auth_links.html' %}
     </div>
   {% endif %}
 {% endblock page_content %}
 
 {% block custom_links %}
-  <p class="mb-0">
+  <p class="mt-1 mb-0">
     <a href="{{ adminlte.create_url(config.ADMINLTE_LOGIN_ENDPOINT) }}">
       {{ _('I already have a membership') }}
     </a>

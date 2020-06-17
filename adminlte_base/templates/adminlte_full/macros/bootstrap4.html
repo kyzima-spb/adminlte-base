@@ -1,4 +1,23 @@
-{% macro field(field, form_group_class='form-group', placeholder='', addon_after=None, show_label=true) %}
+{% macro form_fields(form, exclude=none, form_group_class='form-group', show_label=true, placeholder=false) %}
+  {% if exclude is not iterable %}
+    {% set exclude = [] %}
+  {% endif %}
+  {% for field in form %}
+    {% if field.name not in exclude %}
+      {% if field.widget.input_type != 'hidden' %}
+        {% if placeholder %}
+          {% set placeholder = field.label.text %}
+        {% endif %}
+        {{ form_field(field, form_group_class=form_group_class, show_label=show_label, placeholder=placeholder) }}
+      {% else %}
+        {{ field }}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{% macro form_field(field, form_group_class='form-group', placeholder='', show_label=true,
+               addon_before=none, addon_after=none) %}
   <div class="{{ form_group_class }}">
     {% if show_label %}
       {{ field.label }}
@@ -9,6 +28,16 @@
     {%- else %}
       {% set valid_class='' %}
     {% endif -%}
+
+    {% if field.render_kw and field.render_kw.get('data-icon') %}
+      {% set addon_after %}<span class="{{ field.render_kw.get('data-icon') }}"></span>{% endset %}
+    {% endif %}
+
+    {% if addon_before %}
+      <div class="input-group-prepend">
+        <div class="input-group-text">{{ addon_before|safe }}</div>
+      </div>
+    {% endif %}
 
     {{ field(class="form-control " + valid_class, placeholder=placeholder) }}
 
@@ -24,13 +53,11 @@
       {% endif %}
     {% endif %}
 
-    {%- if addon_after %}
+    {% if addon_after %}
       <div class="input-group-append">
-        <div class="input-group-text">
-          {{ addon_after|safe }}
-        </div>
+        <div class="input-group-text">{{ addon_after|safe }}</div>
       </div>
-    {% endif -%}
+    {% endif %}
 
     {%- if field.errors %}
       <div class="invalid-feedback">

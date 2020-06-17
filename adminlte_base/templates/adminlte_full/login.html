@@ -1,4 +1,5 @@
 {% extends "adminlte_full/skeleton_login.html" %}
+{% import "adminlte_full/macros/bootstrap4.html" as bootstrap %}
 
 {% block page_title %}{{ _('Login') }}{% endblock %}
 
@@ -16,7 +17,9 @@
 {% block page_content %}
   {% block form %}
     <form action="{{ adminlte.create_url(config.ADMINLTE_LOGIN_ENDPOINT) }}" method="post">
-      {% block form_fields %}{% endblock form_fields %}
+      {% block form_fields %}
+        {{ bootstrap.form_fields(form, form_group_class='input-group mb-3', show_label=false, placeholder=true) }}
+      {% endblock form_fields %}
       <div class="row">
         <div class="col-8">
           {% if config.ADMINLTE_REMEMBER_ME %}
@@ -36,21 +39,21 @@
   {% if config.ADMINLTE_ALLOW_SOCIAL_AUTH %}
     <div class="social-auth-links text-center mb-3">
       <p>{{ _('- OR -') }}</p>
-      {% include 'adminlte_full/includes/social_auth_links.html' %}
+      {% include 'includes/social_auth_links.html' %}
     </div>
   {% endif %}
 {% endblock page_content %}
 
 {% block custom_links %}
   {% if config.ADMINLTE_ALLOW_PASSWORD_RESET %}
-    <p class="mb-1">
+    <p class="mt-1 mb-1">
       <a href="{{ adminlte.create_url(config.ADMINLTE_PASSWORD_RESET_ENDPOINT) }}">
         {{ _('Forgotten your password or username?') }}
       </a>
     </p>
   {% endif %}
   {% if config.ADMINLTE_ALLOW_REGISTRATION %}
-    <p class="mb-0">
+    <p class="mt-1 mb-0">
       <a href="{{ adminlte.create_url(config.ADMINLTE_REGISTRATION_ENDPOINT) }}">
         {{ _('Register a new membership') }}
       </a>
