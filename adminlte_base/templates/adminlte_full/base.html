@@ -2,7 +2,6 @@
 {% import "adminlte_full/macros/bootstrap4.html" as bootstrap %}
 {% import 'adminlte_full/macros/markup.html' as adminlte_markup with context %}
 
-
 {% block body_attributes %} class="
   hold-transition
   {{ config.ADMINLTE_LAYOUT|join(' ') }}
@@ -20,7 +19,7 @@
       {% if ThemeLayout.TOP_NAV <= config.ADMINLTE_LAYOUT %}<div class="container">{% endif %}
       {% block navbar_top %}
         {% if ThemeLayout.TOP_NAV <= config.ADMINLTE_LAYOUT %}
-          {% with class_attr='navbar-brand' %}
+          {% with class_attr='navbar-brand', home_page=adminlte.get_home_page() %}
             {% include 'adminlte_full/includes/brand_logo.html' %}
           {% endwith %}
         {% endif %}
@@ -43,7 +42,7 @@
             {% block navbar_left %}
               {% set navbar_menu = adminlte.menu.navbar_menu() %}
               {% if navbar_menu %}
-                {{ adminlte_markup.navbar_menu(navbar_menu) }}
+                {{ adminlte_markup.navbar_menu(menu=navbar_menu) }}
               {% endif %}
             {% endblock navbar_left %}
           </ul>
@@ -61,7 +60,7 @@
               {{ adminlte_markup.tasks_menu(adminlte.get_tasks()) }}
             {% endif %}
             {% if adminlte.current_locale %}
-              {{ adminlte_markup.language_dropdown_menu(adminlte.current_locale, adminlte.get_available_languages()) }}
+              {{ adminlte_markup.language_menu(adminlte.current_locale, adminlte.get_available_languages()) }}
             {% endif %}
           {% endblock navbar_right %}
           {% if adminlte.user %}
@@ -85,7 +84,7 @@
     </nav>
     {% if config.ADMINLTE_MAIN_SIDEBAR_ENABLED %}
       <aside class="main-sidebar elevation-4 {{ config.ADMINLTE_SIDEBAR_COLOR | sidebar_skin(config.ADMINLTE_SIDEBAR_LIGHT) }}">
-        {% with class_attr='brand-link' %}
+        {% with class_attr='brand-link', home_page=adminlte.get_home_page() %}
           {% include 'adminlte_full/includes/brand_logo.html' %}
         {% endwith %}
         <div class="sidebar">
@@ -99,7 +98,7 @@
               {% block sidebar_nav %}
                 {% set sidebar_menu = adminlte.menu.sidebar_menu() %}
                 {% if sidebar_menu %}
-                  {{ adminlte_markup.sidebar_menu(sidebar_menu) }}
+                  {{ adminlte_markup.sidebar_menu(menu=sidebar_menu) }}
                 {% endif %}
               {% endblock sidebar_nav %}
             </nav>

@@ -75,7 +75,6 @@ DEFAULT_SETTINGS = {
     'ADMINLTE_USER_MAPPING': {},
 
     'ADMINLTE_BRAND_COLOR': None,
-    'ADMINLTE_BRAND_IMAGE': '/dist/img/AdminLTELogo.png',
     'ADMINLTE_BRAND_IMAGE_ALT': 'AdminLTE Logo',
     'ADMINLTE_BRAND_TEXT': 'AdminLTE 3',
     'ADMINLTE_BRAND_HTML': '<b>Admin</b>LTE 3',
