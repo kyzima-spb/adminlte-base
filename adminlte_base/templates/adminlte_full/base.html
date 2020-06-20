@@ -63,8 +63,8 @@
               {{ adminlte_markup.language_menu(adminlte.current_locale, adminlte.get_available_languages()) }}
             {% endif %}
           {% endblock navbar_right %}
-          {% if adminlte.user %}
-            {{ adminlte_markup.legacy_user_menu(adminlte.user) }}
+          {% if adminlte_user %}
+            {{ adminlte_markup.legacy_user_menu(adminlte_user) }}
           {% endif %}
           <li class="nav-item d-sm-none">
             <a class="nav-link" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" href="#" role="button">
@@ -89,8 +89,8 @@
         {% endwith %}
         <div class="sidebar">
           {% block sidebar %}
-            {% if adminlte.user %}
-              {% with user=adminlte.user %}
+            {% if adminlte_user %}
+              {% with user=adminlte_user %}
                 {% include 'adminlte_full/includes/user_sidebar_panel.html' %}
               {% endwith %}
             {% endif %}
