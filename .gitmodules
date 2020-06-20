@@ -8,3 +8,6 @@
 [submodule "flask-adminlte-full"]
 	path = flask-adminlte-full
 	url = git@github.com:kyzima-spb/flask-adminlte-full.git
+[submodule "jinja-to-another"]
+	path = jinja-to-another
+	url = ./jinja-to-another

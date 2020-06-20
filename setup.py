@@ -27,7 +27,6 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            # 'adminlte=adminlte_base.cli:cli',
         ],
     },
     setup_requires=['setuptools_scm'],
