@@ -3,6 +3,8 @@ A basic package to simplify the integration of AdminLTE with other frameworks.
 """
 
 from abc import ABCMeta, abstractmethod
+import copy
+from functools import partial
 
 from .constants import *
 from .data_types import *
@@ -12,10 +14,11 @@ from .mixins import *
 
 
 class MenuLoader(metaclass=ABCMeta):
-    __slots__ = ('manager',)
+    __slots__ = ('manager', 'context')
 
-    def __init__(self, manager):
+    def __init__(self, manager, context=None):
         self.manager = manager
+        self.context = context
 
     def _create(self, data, active_path=None):
         """Creates and returns a menu object."""
@@ -74,9 +77,10 @@ class AbstractManager(metaclass=ABCMeta):
         '_tasks_callback',
         '_user_callback',
         'home_page',
+        'context',
     )
 
-    def __init__(self):
+    def __init__(self, context=None):
         self._available_languages_callback = None
         self._home_page_callback = None
         self._locale_callback = None
@@ -86,6 +90,25 @@ class AbstractManager(metaclass=ABCMeta):
         self._tasks_callback = None
         self._user_callback = None
         self.home_page = None
+        self.context = context
+
+    def with_context(self, context):
+        clone = copy.copy(self)
+        clone.context = context
+        return clone
+
+    __call__ = with_context
+
+    def _get_callback(self, name):
+        callback = getattr(self, name)
+
+        if callback is None:
+            return None
+
+        if self.context is None:
+            return callback
+
+        return partial(callback, context=self.context)
 
     def available_languages_loader(self, callback):
         """
@@ -103,8 +126,10 @@ class AbstractManager(metaclass=ABCMeta):
     @return_namedtuple('HomeUrl', 'url', 'title')
     def get_home_page(self):
         """Returns a link to the home page as a named tuple with url and title fields."""
-        if self._home_page_callback is not None:
-            return self._home_page_callback()
+        callback = self._get_callback('_home_page_callback')
+
+        if callback is not None:
+            return callback()
 
         if self.home_page is None:
             self.home_page = ('/', 'Home')
@@ -118,8 +143,10 @@ class AbstractManager(metaclass=ABCMeta):
     @property
     def current_locale(self):
         """Returns the current language code for current locale if `locale_getter` is set."""
-        if self._locale_callback is not None:
-            return self._locale_callback()
+        callback = self._get_callback('_locale_callback')
+
+        if callback is not None:
+            return callback()
 
     def current_locale_getter(self, callback):
         """
@@ -133,15 +160,14 @@ class AbstractManager(metaclass=ABCMeta):
         self._locale_callback = callback
         return callback
 
-    def get_available_languages(self, context=None, as_dict=False):
+    def get_available_languages(self, as_dict=False):
         """Normalizes and returns a dictionary with a list of available languages."""
-        if self._available_languages_callback is None:
+        callback = self._get_callback('_available_languages_callback')
+
+        if callback is None:
             raise exceptions.Error('Missing available_languages_loader.')
 
-        if context is None:
-            languages = self._available_languages_callback()
-        else:
-            languages = self._available_languages_callback(context)
+        languages = callback()
 
         if isinstance(languages, dict):
             languages = languages.items()
@@ -155,45 +181,42 @@ class AbstractManager(metaclass=ABCMeta):
         """Creates and returns all pop-up messages by category."""
         raise NotImplementedError
 
-    def get_incoming_messages(self, context=None):
+    def get_incoming_messages(self):
         """Creates and returns a drop-down list of incoming messages."""
-        if self._messages_callback is None:
+        callback = self._get_callback('_messages_callback')
+
+        if callback is None:
             raise exceptions.Error('Missing messages_loader.')
 
-        if context is None:
-            messages = self._messages_callback()
-        else:
-            messages = self._messages_callback(context)
+        messages = callback()
 
         if not isinstance(messages, Dropdown):
             raise exceptions.Error(f'{type(messages).__name__} unsupported return type for messages_loader; Dropdown required.')
 
         return messages
 
-    def get_notifications(self, context=None):
+    def get_notifications(self):
         """Creates and returns a drop-down list of notifications."""
-        if self._notifications_callback is None:
+        callback = self._get_callback('_notifications_callback')
+
+        if callback is None:
             raise exceptions.Error('Missing notifications_loader.')
 
-        if context is None:
-            notifications = self._notifications_callback()
-        else:
-            notifications = self._notifications_callback(context)
+        notifications = callback()
 
         if not isinstance(notifications, Dropdown):
             raise exceptions.Error(f'{type(notifications).__name__} unsupported return type for notifications_loader; Dropdown required.')
 
         return notifications
 
-    def get_tasks(self, context=None):
+    def get_tasks(self):
         """Creates and returns a drop-down list of assigned or executable tasks."""
-        if self._tasks_callback is None:
+        callback = self._get_callback('_tasks_callback')
+
+        if callback is None:
             raise exceptions.Error('Missing tasks_loader.')
 
-        if context is None:
-            tasks = self._tasks_callback()
-        else:
-            tasks = self._tasks_callback(context)
+        tasks = callback()
 
         if not isinstance(tasks, Dropdown):
             raise exceptions.Error(
@@ -216,7 +239,7 @@ class AbstractManager(metaclass=ABCMeta):
         """The loader for retrieving a menu object."""
         if self._menu_loader is None:
             raise exceptions.Error('Missing menu_loader.')
-        return self._menu_loader(self)
+        return self._menu_loader(self, context=self.context)
 
     def menu_loader(self, loader: MenuLoader):
         """
@@ -266,10 +289,12 @@ class AbstractManager(metaclass=ABCMeta):
     @property
     def user(self):
         """Returns the current user if user_getter is set, otherwise returns None."""
-        if self._user_callback is None:
+        callback = self._get_callback('_user_callback')
+
+        if callback is None:
             return None
 
-        return User(*self._user_callback())
+        return User(*callback())
 
     def user_getter(self, callback):
         """
