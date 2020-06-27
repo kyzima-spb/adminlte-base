@@ -118,10 +118,10 @@
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right" itemscope itemtype="http://schema.org/BreadcrumbList">
-                    {% block breadcrumb %}
+                    {% block breadcrumbs %}
                       {% set home_page = adminlte.get_home_page() %}
                       {{ bootstrap.breadcrumb(title=home_page.title, url=home_page.url, icon='fas fa-home') }}
-                    {% endblock breadcrumb %}
+                    {% endblock breadcrumbs %}
                   </ol>
                 </div>
               </div>
