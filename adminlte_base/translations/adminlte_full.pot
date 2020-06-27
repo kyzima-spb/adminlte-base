@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AdminLTE-Full VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-06-17 18:59+0300\n"
+"POT-Creation-Date: 2020-06-28 00:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: adminlte_base/templates/adminlte_full/change_password.html:9
 #: adminlte_base/templates/adminlte_full/change_password.html:28
 #: adminlte_base/templates/adminlte_full/includes/legacy_user_dropdown.html:6
-#: adminlte_base/templates/adminlte_full/recover_password.html:22
+#: adminlte_base/templates/adminlte_full/recover_password.html:25
 msgid "Change my password"
 msgstr ""
 
@@ -35,28 +35,28 @@ msgstr ""
 msgid "Enter a new password"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/forgot_password.html:3
+#: adminlte_base/templates/adminlte_full/forgot_password.html:4
 msgid "Password Reset"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/forgot_password.html:7
+#: adminlte_base/templates/adminlte_full/forgot_password.html:8
 msgid "You forgot your password? Here you can easily retrieve a new password."
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/forgot_password.html:17
-#: adminlte_base/templates/adminlte_full/recover_password.html:29
+#: adminlte_base/templates/adminlte_full/forgot_password.html:20
+#: adminlte_base/templates/adminlte_full/recover_password.html:32
 msgid "Reset my password"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/forgot_password.html:26
+#: adminlte_base/templates/adminlte_full/forgot_password.html:29
 #: adminlte_base/templates/adminlte_full/lockscreen.html:16
 #: adminlte_base/templates/adminlte_full/login.html:33
 #: adminlte_base/templates/adminlte_full/macros/markup.html:36
-#: adminlte_base/templates/adminlte_full/recover_password.html:36
+#: adminlte_base/templates/adminlte_full/recover_password.html:39
 msgid "Log in"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/forgot_password.html:31
+#: adminlte_base/templates/adminlte_full/forgot_password.html:34
 #: adminlte_base/templates/adminlte_full/login.html:58
 #: adminlte_base/templates/adminlte_full/register.html:7
 msgid "Register a new membership"
@@ -106,17 +106,17 @@ msgstr ""
 msgid "Forgotten your password or username?"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/recover_password.html:3
+#: adminlte_base/templates/adminlte_full/recover_password.html:4
 msgid "Recover Password"
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/recover_password.html:8
+#: adminlte_base/templates/adminlte_full/recover_password.html:9
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
 
-#: adminlte_base/templates/adminlte_full/recover_password.html:10
+#: adminlte_base/templates/adminlte_full/recover_password.html:11
 msgid ""
 "The password reset link was invalid, possibly because it has already been"
 " used. Please request a new password reset."
@@ -145,5 +145,21 @@ msgstr ""
 
 #: adminlte_base/templates/adminlte_full/includes/legacy_user_dropdown.html:10
 msgid "Log out"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/macros/markup.html:73
+msgid "See All Messages"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/macros/markup.html:95
+msgid "See All Notifications"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/macros/markup.html:122
+msgid "See all tasks"
+msgstr ""
+
+#: adminlte_base/templates/adminlte_full/macros/markup.html:149
+msgid "Search"
 msgstr ""
 
