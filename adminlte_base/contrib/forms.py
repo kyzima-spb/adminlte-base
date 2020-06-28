@@ -6,6 +6,11 @@ from wtforms.fields import (
 from wtforms import validators
 
 
+__all__ = (
+    'LoginForm', 'ResetPasswordForm',
+)
+
+
 class LoginForm(Form):
     """Login form."""
     email = StringField('E-Mail', validators=[

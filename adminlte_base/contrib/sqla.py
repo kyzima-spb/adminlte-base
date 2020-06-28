@@ -6,6 +6,11 @@ from ..data_types import MenuItem
 from ..mixins import MenuItemMixin as _MenuItemMixin, MenuMixin as _MenuMixin
 
 
+__all__ = (
+    'MenuItemMixin', 'create_entity_menu_item',
+)
+
+
 class MenuItemMixin(_MenuItemMixin):
     __tablename__ = 'menu_item'
 
