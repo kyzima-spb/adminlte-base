@@ -46,24 +46,13 @@ class MenuLoader(metaclass=ABCMeta):
 
         return menu
 
-    def get(self, program_name, active_path=None):
-        """Creates and returns a menu with the specified program name."""
-        data = self.load(program_name)
-
-        if data is None:
-            raise exceptions.MenuNotFound(program_name)
-
-        return self._create(data, active_path)
-
-    @abstractmethod
-    def load(self, program_name):
-        """Returns data for building a menu from an external source."""
-
     def navbar_menu(self, active_path=None):
         """Creates and returns a navbar menu."""
+        return None
 
     def sidebar_menu(self, active_path=None):
         """Creates and returns a sidebar menu."""
+        return None
 
 
 class AbstractManager(metaclass=ABCMeta):
