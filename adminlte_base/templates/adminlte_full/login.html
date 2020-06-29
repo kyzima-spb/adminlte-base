@@ -1,7 +1,7 @@
 {% extends "adminlte_full/skeleton_login.html" %}
 {% import "adminlte_full/macros/bootstrap4.html" as bootstrap %}
 
-{% block page_title %}{{ _('Login') }}{% endblock %}
+{% block page_title %}{{ adminlte.gettext('Login') }}{% endblock %}
 
 {% block messages %}
   {% if adminlte_user.is_authenticated %}
@@ -10,7 +10,7 @@
       Would you like to login to a different account?
     </p>
   {% else %}
-    <p class="login-box-msg">{{ _('Sign in to start your session') }}</p>
+    <p class="login-box-msg">{{ adminlte.gettext('Sign in to start your session') }}</p>
   {% endif %}
 {% endblock messages %}
 
@@ -25,12 +25,12 @@
           {% if config.ADMINLTE_REMEMBER_ME %}
             <div class="icheck-primary">
               <input type="checkbox" name="remember_me" id="remember">
-              <label for="remember">{{ _('Remember Me') }}</label>
+              <label for="remember">{{ adminlte.gettext('Remember Me') }}</label>
             </div>
           {% endif %}
         </div>
         <div class="col-4">
-          <button type="submit" class="btn btn-primary btn-block">{{ _('Log in') }}</button>
+          <button type="submit" class="btn btn-primary btn-block">{{ adminlte.gettext('Log in') }}</button>
         </div>
       </div>
     </form>
@@ -38,7 +38,7 @@
 
   {% if config.ADMINLTE_ALLOW_SOCIAL_AUTH %}
     <div class="social-auth-links text-center mb-3">
-      <p>{{ _('- OR -') }}</p>
+      <p>{{ adminlte.gettext('- OR -') }}</p>
       {% include 'includes/social_auth_links.html' %}
     </div>
   {% endif %}
@@ -48,14 +48,14 @@
   {% if config.ADMINLTE_ALLOW_PASSWORD_RESET %}
     <p class="mt-1 mb-1">
       <a href="{{ adminlte.create_url(config.ADMINLTE_PASSWORD_RESET_ENDPOINT) }}">
-        {{ _('Forgotten your password or username?') }}
+        {{ adminlte.gettext('Forgotten your password or username?') }}
       </a>
     </p>
   {% endif %}
   {% if config.ADMINLTE_ALLOW_REGISTRATION %}
     <p class="mt-1 mb-0">
       <a href="{{ adminlte.create_url(config.ADMINLTE_REGISTRATION_ENDPOINT) }}">
-        {{ _('Register a new membership') }}
+        {{ adminlte.gettext('Register a new membership') }}
       </a>
     </p>
   {% endif %}

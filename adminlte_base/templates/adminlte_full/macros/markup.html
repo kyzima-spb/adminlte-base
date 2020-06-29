@@ -33,11 +33,11 @@
   {% else %}
     <li class="nav-item">
       <a href="{{ adminlte.create_url(config.ADMINLTE_LOGIN_ENDPOINT) }}" class="btn btn-primary ml-2">
-        {{ _('Log in') }}
+        {{ adminlte.gettext('Log in') }}
       </a>
       {% if config.ADMINLTE_ALLOW_REGISTRATION %}
         <a href="{{ adminlte.create_url(config.ADMINLTE_REGISTRATION_ENDPOINT) }}" class="btn btn-danger ml-2">
-          {{ _('Registration') }}
+          {{ adminlte.gettext('Registration') }}
         </a>
       {% endif %}
     </li>
@@ -70,7 +70,7 @@
         </a>
         <div class="dropdown-divider"></div>
       {% endfor %}
-      <a href="{{ messages.get_url() }}" class="dropdown-item dropdown-footer">{{ _('See All Messages') }}</a>
+      <a href="{{ messages.get_url() }}" class="dropdown-item dropdown-footer">{{ adminlte.gettext('See All Messages') }}</a>
     </div>
   </li>
 {%- endmacro %}
@@ -92,7 +92,7 @@
         </a>
         <div class="dropdown-divider"></div>
       {% endfor %}
-      <a href="{{ notifications.get_url() }}" class="dropdown-item dropdown-footer">{{ _('See All Notifications') }}</a>
+      <a href="{{ notifications.get_url() }}" class="dropdown-item dropdown-footer">{{ adminlte.gettext('See All Notifications') }}</a>
     </div>
   </li>
 {%- endmacro %}
@@ -119,7 +119,7 @@
         </a>
         <div class="dropdown-divider"></div>
       {% endfor %}
-      <a href="{{ tasks.get_url() }}" class="dropdown-item dropdown-footer">{{ _('See all tasks') }}</a>
+      <a href="{{ tasks.get_url() }}" class="dropdown-item dropdown-footer">{{ adminlte.gettext('See all tasks') }}</a>
     </div>
   </li>
 {%- endmacro %}
@@ -146,7 +146,7 @@
 {% macro navbar_search_form() -%}
   <form class="form-inline ml-0 ml-md-3" action="{{ adminlte.create_url(config.ADMINLTE_SEARCH_ENDPOINT) }}" method="get">
     <div class="input-group input-group-sm">
-      <input name="q" type="search" class="form-control form-control-navbar" placeholder="{{ _('Search') }}" aria-label="{{ _('Search') }}">
+      <input name="q" type="search" class="form-control form-control-navbar" placeholder="{{ adminlte.gettext('Search') }}" aria-label="{{ adminlte.gettext('Search') }}">
       <div class="input-group-append">
         <button class="btn btn-navbar" type="submit">
           <i class="fas fa-search"></i>
