@@ -6,10 +6,13 @@ from abc import ABCMeta, abstractmethod
 import copy
 from functools import partial
 
+from jinja2 import Markup
+
 from .constants import *
 from .data_types import *
 from .decorators import *
 from .exceptions import *
+from .i18n import get_translations
 from .mixins import *
 
 
@@ -112,19 +115,6 @@ class AbstractManager(metaclass=ABCMeta):
         self._available_languages_callback = callback
         return callback
 
-    @return_namedtuple('HomeUrl', 'url', 'title')
-    def get_home_page(self):
-        """Returns a link to the home page as a named tuple with url and title fields."""
-        callback = self._get_callback('_home_page_callback')
-
-        if callback is not None:
-            return callback()
-
-        if self.home_page is None:
-            self.home_page = ('/', 'Home')
-
-        return self.home_page
-
     @abstractmethod
     def create_url(self, endpoint, *endpoint_args, **endpoint_kwargs):
         """Creates and returns a URL using the address generation system of a specific framework."""
@@ -170,6 +160,19 @@ class AbstractManager(metaclass=ABCMeta):
         """Creates and returns all pop-up messages by category."""
         raise NotImplementedError
 
+    @return_namedtuple('HomeUrl', 'url', 'title')
+    def get_home_page(self):
+        """Returns a link to the home page as a named tuple with url and title fields."""
+        callback = self._get_callback('_home_page_callback')
+
+        if callback is not None:
+            return callback()
+
+        if self.home_page is None:
+            self.home_page = ('/', 'Home')
+
+        return self.home_page
+
     def get_incoming_messages(self):
         """Creates and returns a drop-down list of incoming messages."""
         callback = self._get_callback('_messages_callback')
@@ -212,6 +215,31 @@ class AbstractManager(metaclass=ABCMeta):
                 f'{type(tasks).__name__} unsupported return type for tasks_loader; Dropdown required.')
 
         return tasks
+
+    def get_translations(self):
+        """Returns the correct gettext translations"""
+        locale = self.current_locale
+        return get_translations([locale] if locale else [])
+
+    def gettext(self, message, **variables):
+        """
+        Get a translation for the given message.
+
+        Arguments:
+            message (str): A unicode string to be translated.
+        """
+        return Markup(self.get_translations().gettext(message) % variables)
+
+    def ngettext(self, singular, plural, n, **variables):
+        """
+        Get a translation for a message which can be pluralized.
+
+        Arguments:
+            singular (str): The singular form of the message.
+            plural (str): The plural form of the message.
+            n (int): The number of elements this message is referring to.
+        """
+        return Markup(self.get_translations().ngettext(singular, plural, n) % variables)
 
     def home_page_getter(self, callback):
         """
