@@ -60,7 +60,7 @@ class MenuLoader(metaclass=ABCMeta):
 
 class AbstractManager(metaclass=ABCMeta):
     __slots__ = (
-        '_available_languages_callback',
+        '_languages_callback',
         '_home_page_callback',
         '_locale_callback',
         '_menu_loader',
@@ -68,12 +68,18 @@ class AbstractManager(metaclass=ABCMeta):
         '_notifications_callback',
         '_tasks_callback',
         '_user_callback',
-        'home_page',
         'context',
+        'default_locale',
+        'home_page',
     )
 
-    def __init__(self, context=None):
-        self._available_languages_callback = None
+    def __init__(self, context=None, default_locale=None):
+        """
+        Arguments:
+            context (mixed): An abstract context object
+            default_locale (str): The default language.
+        """
+        self._languages_callback = None
         self._home_page_callback = None
         self._locale_callback = None
         self._menu_loader = None
@@ -83,8 +89,15 @@ class AbstractManager(metaclass=ABCMeta):
         self._user_callback = None
         self.home_page = None
         self.context = context
+        self.default_locale = default_locale
 
     def with_context(self, context):
+        """
+        Arguments:
+            context (mixed): An abstract context object, maybe anything,
+                             is passed automatically to all callback functions
+                            if passed to the constructor.
+        """
         clone = copy.copy(self)
         clone.context = context
         return clone
@@ -102,49 +115,17 @@ class AbstractManager(metaclass=ABCMeta):
 
         return partial(callback, context=self.context)
 
-    def available_languages_loader(self, callback):
-        """
-        This sets the callback for loading available languages.
-
-        Arguments:
-            callback (callable): callback to get available languages.
-
-        Returns:
-            a menu object, or ``None`` if the menu does not exist.
-        """
-        self._available_languages_callback = callback
-        return callback
-
     @abstractmethod
     def create_url(self, endpoint, *endpoint_args, **endpoint_kwargs):
         """Creates and returns a URL using the address generation system of a specific framework."""
-
-    @property
-    def current_locale(self):
-        """Returns the current language code for current locale if `locale_getter` is set."""
-        callback = self._get_callback('_locale_callback')
-
-        if callback is not None:
-            return callback()
-
-    def current_locale_getter(self, callback):
-        """
-        This sets a callback function for current locale selection.
-
-        The default behaves as if a function was registered that returns `None` all the time.
-
-        Arguments:
-            callback (callable): the callback to get the current locale.
-        """
-        self._locale_callback = callback
-        return callback
+        raise NotImplementedError
 
     def get_available_languages(self, as_dict=False):
         """Normalizes and returns a dictionary with a list of available languages."""
-        callback = self._get_callback('_available_languages_callback')
+        callback = self._get_callback('_languages_callback')
 
         if callback is None:
-            raise exceptions.Error('Missing available_languages_loader.')
+            raise exceptions.Error('Missing languages_loader.')
 
         languages = callback()
 
@@ -187,6 +168,16 @@ class AbstractManager(metaclass=ABCMeta):
 
         return messages
 
+    def get_locale(self):
+        """Returns the current language code for current locale if `locale_getter` is set."""
+        callback = self._get_callback('_locale_callback')
+        locale = None
+
+        if callback is not None:
+            locale = callback()
+
+        return locale or self.default_locale
+
     def get_notifications(self):
         """Creates and returns a drop-down list of notifications."""
         callback = self._get_callback('_notifications_callback')
@@ -218,8 +209,7 @@ class AbstractManager(metaclass=ABCMeta):
 
     def get_translations(self):
         """Returns the correct gettext translations"""
-        locale = self.current_locale
-        return get_translations([locale] if locale else [])
+        return get_translations(self.get_locale())
 
     def gettext(self, message, **variables):
         """
@@ -229,6 +219,45 @@ class AbstractManager(metaclass=ABCMeta):
             message (str): A unicode string to be translated.
         """
         return Markup(self.get_translations().gettext(message) % variables)
+
+    def home_page_getter(self, callback):
+        """
+        This sets a callback to get the home page.
+
+        Arguments:
+            callback (callable): callback to get the home page.
+        """
+        self._home_page_callback = callback
+        return callback
+
+    def languages_loader(self, callback):
+        """
+        This sets the callback for loading available languages.
+
+        Arguments:
+            callback (callable): callback to get available languages.
+
+        Returns:
+            1. A dictionary where the key is the name of the locale and the value is the human-readable name.
+            2. A tuple or list of pairs,
+               where the first element of the pair is the locale name
+               and the second element of the pair is a human-readable name.
+            3. A generator, where each returned item is a pair - the name of the locale, a human-readable name.
+        """
+        self._languages_callback = callback
+        return callback
+
+    def locale_getter(self, callback):
+        """
+        This sets a callback function for current locale selection.
+
+        The default behaves as if a function was registered that returns `None` all the time.
+
+        Arguments:
+            callback (callable): the callback to get the current locale.
+        """
+        self._locale_callback = callback
+        return callback
 
     def ngettext(self, singular, plural, n, **variables):
         """
@@ -240,16 +269,6 @@ class AbstractManager(metaclass=ABCMeta):
             n (int): The number of elements this message is referring to.
         """
         return Markup(self.get_translations().ngettext(singular, plural, n) % variables)
-
-    def home_page_getter(self, callback):
-        """
-        This sets a callback to get the home page.
-
-        Arguments:
-            callback (callable): callback to get the home page.
-        """
-        self._home_page_callback = callback
-        return callback
 
     @property
     def menu(self):

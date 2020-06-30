@@ -16,5 +16,10 @@ def get_locale_dir():
 
 def get_translations(languages=None, class_=None):
     """Returns the correct gettext translations"""
+    if languages is not None:
+        if not isinstance(languages, (tuple, list)):
+            languages = [languages]
+        languages = map(str, languages)
+
     return gettext.translation('adminlte_full', get_locale_dir(), languages,
                                class_=class_, fallback=True)
