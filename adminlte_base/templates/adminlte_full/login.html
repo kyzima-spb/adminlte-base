@@ -18,7 +18,8 @@
   {% block form %}
     <form action="{{ adminlte.create_url(config.ADMINLTE_LOGIN_ENDPOINT) }}" method="post">
       {% block form_fields %}
-        {{ bootstrap.form_fields(form, form_group_class='input-group mb-3', show_label=false, placeholder=true) }}
+        {{ bootstrap.form_fields(form, form_group_class='input-group mb-3',
+                                 show_label=false, placeholder=true, exclude=['remember_me']) }}
       {% endblock form_fields %}
       <div class="row">
         <div class="col-8">

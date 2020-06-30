@@ -3,7 +3,7 @@ from wtforms.fields import (
     StringField, PasswordField, BooleanField, HiddenField, FloatField,
     FieldList, FormField, TextAreaField, RadioField
 )
-from wtforms import validators
+import wtforms.validators as vd
 
 
 __all__ = (
@@ -14,17 +14,20 @@ __all__ = (
 class LoginForm(Form):
     """Login form."""
     email = StringField('E-Mail', validators=[
-        validators.InputRequired(),
-        validators.Email()
+        vd.InputRequired(),
+        vd.Email()
     ], render_kw={'data-icon': 'fas fa-envelope'})
     password = PasswordField('Password', validators=[
-        validators.InputRequired()
+        vd.InputRequired()
     ], render_kw={'data-icon': 'fas fa-lock'})
+    remember_me = BooleanField('Remember Me', validators=[
+        vd.Optional()
+    ])
 
 
 class ResetPasswordForm(Form):
     """Password reset form."""
     email = StringField('E-Mail', validators=[
-        validators.InputRequired(),
-        validators.Email()
+        vd.InputRequired(),
+        vd.Email()
     ], render_kw={'data-icon': 'fas fa-envelope'})
