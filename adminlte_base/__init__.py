@@ -121,7 +121,12 @@ class AbstractManager(metaclass=ABCMeta):
         raise NotImplementedError
 
     def get_available_languages(self, as_dict=False):
-        """Normalizes and returns a dictionary with a list of available languages."""
+        """
+        Normalizes and returns a dictionary with a list of available languages.
+
+        Raises:
+            adminlte_base.exceptions.Error: If the language loader is not installed..
+        """
         callback = self._get_callback('_languages_callback')
 
         if callback is None:
@@ -236,6 +241,38 @@ class AbstractManager(metaclass=ABCMeta):
 
         Arguments:
             callback (callable): callback to get available languages.
+
+        Examples:
+            A dictionary where the key is the name of the locale and the value is the human-readable name::
+
+                @manager.languages_loader
+                def load_languages():
+                    return {
+                        'ru_RU': 'Русский',
+                        'uk_UA': 'Українська',
+                        'en_US': 'English',
+                    }
+
+            A tuple or list of pairs,
+            where the first element of the pair is the locale name
+            and the second element of the pair is a human-readable name::
+
+                @manager.languages_loader
+                def load_languages():
+                    return (
+                        ('ru_RU', 'Русский'),
+                        ('uk_UA', 'Українська'),
+                        ('en_US', 'English'),
+                    )
+
+            A generator, where each returned item is a pair - the name of the locale, a human-readable name::
+
+                from babel import Locale
+
+                @manager.languages_loader
+                def load_languages():
+                    for l in ('ru_RU', 'uk_UA', 'ro_MD', 'en_US'):
+                        yield l, Locale.parse(l).get_display_name().title()
 
         Returns:
             1. A dictionary where the key is the name of the locale and the value is the human-readable name.
