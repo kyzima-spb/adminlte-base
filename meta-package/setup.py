@@ -12,7 +12,7 @@ readme = read_file('README.rst')
 
 setup(
     name='adminlte-full',
-    version='0.1.0',
+    version='0.1.1',
     # use_scm_version={
     #     'relative_to': __file__,
     #     'local_scheme': lambda version: '',
