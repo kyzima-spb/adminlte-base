@@ -6,5 +6,6 @@ AdminLTE-Full
 
    index
    configuration
-   flask
-   api/adminlte_base
+   Flask <flask>
+   Django <django>
+   Api Reference <api/adminlte_base>

@@ -64,6 +64,6 @@ HTML Forms
    Password reset form.
 
 .. _Flask: http://flask.pocoo.org/
-.. _AdminLTE: https://github.com/almasaeed2010/AdminLTE/
+.. _AdminLTE: https://adminlte.io/
 .. _Flask-Babel: https://pythonhosted.org/Flask-Babel/
 .. _Flask-BabelEx: https://pythonhosted.org/Flask-BabelEx/
