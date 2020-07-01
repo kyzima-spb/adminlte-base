@@ -74,3 +74,11 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# Options for intersphinx extension
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'flask': ('http://flask.pocoo.org/docs/1.0', None),
+    'flask_wtf': ('http://flask-wtf.readthedocs.io/en/stable/', None),
+}

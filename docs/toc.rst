@@ -6,4 +6,5 @@ AdminLTE-Full
 
    index
    configuration
+   flask
    api/adminlte_base
