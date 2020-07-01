@@ -96,7 +96,7 @@ class AbstractManager(metaclass=ABCMeta):
         Arguments:
             context (mixed): An abstract context object, maybe anything,
                              is passed automatically to all callback functions
-                            if passed to the constructor.
+                             if passed to the constructor.
         """
         clone = copy.copy(self)
         clone.context = context
