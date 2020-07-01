@@ -9,7 +9,7 @@ What is AdminLTE-Full?
   |Base-PyPI| |Base-LICENCE| |Base-STARS|
 
 * `flask-adminlte-full <https://pypi.org/project/flask-adminlte-full/>`_
-  - This Flask extension is port the AdminLTE Template for easy integration into Flask Framework.
+  - An extension for Flask that integrates the AdminLTE template with most of the features.
 
   |Flask-PyPI| |Flask-LICENCE| |Flask-STARS|
 
