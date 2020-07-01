@@ -240,7 +240,7 @@ class Menu(object):
     def activate_by_path(self, path):
         """Makes active a menu item whose URL matches the one specified in the argument."""
         for item in self._items.values():
-            if item.url == path:
+            if item.type == MenuItem.TYPE_LINK and item.url == path:
                 item.set_active(True)
                 return True
         return False
