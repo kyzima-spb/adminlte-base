@@ -1,7 +1,7 @@
 What is AdminLTE-Full?
 ======================
 
-**AdminLTE-Full** - is a generic name that combines several packages:
+**AdminLTE-Full** - A metapackage that combines packages:
 
 * `adminlte-base <https://pypi.org/project/adminlte-base/>`_
   - A basic package to simplify the integration of AdminLTE with other frameworks.

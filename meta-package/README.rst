@@ -1,7 +1,7 @@
 What is AdminLTE-Full?
 ======================
 
-**AdminLTE-Full** - A metapackage that combines packages: adminlte-base, flask-adminlte-full, django-adminlte-full, and other related packages:
+**AdminLTE-Full** - A metapackage that combines packages:
 
 * `adminlte-base <https://pypi.org/project/adminlte-base/>`_
   - A basic package to simplify the integration of AdminLTE with other frameworks.
