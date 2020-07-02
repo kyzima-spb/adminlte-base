@@ -17,9 +17,22 @@ from .mixins import *
 
 
 class MenuLoader(metaclass=ABCMeta):
+    """
+    A menu loader from a database or other source.
+
+    Attributes:
+        manager (Manager): Manager for accessing AdminLTE features.
+        context (mixed): An abstract context object.
+    """
+
     __slots__ = ('manager', 'context')
 
     def __init__(self, manager, context=None):
+        """
+        Arguments:
+            manager (Manager): Manager for accessing AdminLTE features.
+            context (mixed): An abstract context object.
+        """
         self.manager = manager
         self.context = context
 
@@ -49,11 +62,11 @@ class MenuLoader(metaclass=ABCMeta):
 
         return menu
 
-    def navbar_menu(self, active_path=None):
+    def navbar_menu(self):
         """Creates and returns a navbar menu."""
         return None
 
-    def sidebar_menu(self, active_path=None):
+    def sidebar_menu(self):
         """Creates and returns a sidebar menu."""
         return None
 
@@ -76,7 +89,7 @@ class AbstractManager(metaclass=ABCMeta):
     def __init__(self, context=None, default_locale=None):
         """
         Arguments:
-            context (mixed): An abstract context object
+            context (mixed): An abstract context object.
             default_locale (str): The default language.
         """
         self._languages_callback = None
@@ -101,8 +114,6 @@ class AbstractManager(metaclass=ABCMeta):
         clone = copy.copy(self)
         clone.context = context
         return clone
-
-    __call__ = with_context
 
     def _get_callback(self, name):
         callback = getattr(self, name)
