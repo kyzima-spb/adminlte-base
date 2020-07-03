@@ -328,7 +328,6 @@ class AbstractManager(metaclass=ABCMeta):
     def menu_loader(self, loader: MenuLoader):
         """
         This sets the callback for loading a menu from the database or other source.
-        The function you set should take a menu ID or program name.
 
         Arguments:
             loader (MenuLoader): the loader for retrieving a menu object.
