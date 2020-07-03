@@ -25,15 +25,9 @@ setup(
     author_email='office@kyzima-spb.com',
     packages=find_packages(),
     include_package_data=True,
-    entry_points={
-        'console_scripts': [
-        ],
-    },
     setup_requires=['setuptools_scm'],
     install_requires=[
         'arrow',
-        'Click>=7.1,<8',
-        'colorama',
     ],
     classifiers=[
         'Environment :: Web Environment',
