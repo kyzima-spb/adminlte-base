@@ -1,16 +1,16 @@
-{% macro form_fields(form, exclude=none, form_group_class='form-group', show_label=true, placeholder=false) %}
+{% macro form_fields(form, only=none, exclude=none, form_group_class='form-group', show_label=true, placeholder=false) %}
   {% if exclude is not iterable %}
     {% set exclude = [] %}
   {% endif %}
   {% for field in form %}
-    {% if field.name not in exclude %}
-      {% if field.widget.input_type != 'hidden' %}
+    {% if field.widget.input_type == 'hidden' %}
+      {{ field }}
+    {% else %}
+      {% if field.name not in exclude and (not only or field.name in only) %}
         {% if placeholder %}
           {% set placeholder = field.label.text %}
         {% endif %}
         {{ form_field(field, form_group_class=form_group_class, show_label=show_label, placeholder=placeholder) }}
-      {% else %}
-        {{ field }}
       {% endif %}
     {% endif %}
   {% endfor %}
