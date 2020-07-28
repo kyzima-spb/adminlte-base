@@ -2,13 +2,11 @@
 Mixins to create your own entity classes.
 """
 
-__all__ = (
-    'MenuItemMixin', 'MenuMixin',
-)
+__all__ = ('MenuLinkMixin', 'MenuMixin', 'MenuItemMixin')
 
 
-class MenuItemMixin(object):
-    """Mixin for the database model, which describes the menu item."""
+class MenuLinkMixin(object):
+    """Mixin for the database model, which describes the menu link."""
 
     def get_endpoint(self):
         """Returns the name of the entry point / route."""
@@ -34,14 +32,6 @@ class MenuItemMixin(object):
         """Returns a unique identifier for a menu item."""
         return self.id
 
-    def get_parent_id(self):
-        """Returns the unique identifier of the parent menu item."""
-        return self.parent and self.parent.get_id()
-
-    def get_pos(self):
-        """Returns the position of an item in a menu."""
-        return self.pos
-
     def get_title(self):
         """Returns the title of a menu item."""
         return self.title
@@ -55,6 +45,26 @@ class MenuItemMixin(object):
         return self.url
 
 
+class MenuItemMixin(object):
+    """Mixin for the database model, which describes the menu item."""
+
+    def get_before_id(self):
+        """Returns the identifier of the link before which you want to insert the current menu item."""
+        return self.before_id
+
+    def get_link(self):
+        """Returns the link used in the menu item."""
+        return self.link
+
+    def get_parent_id(self):
+        """Returns the unique identifier of the parent menu item."""
+        return self.parent and self.parent.get_id()
+
+    def get_pos(self):
+        """Returns the position of an item in a menu."""
+        return self.pos
+
+
 class MenuMixin(object):
     """Mixin for the database model that describes the menu."""
 
@@ -62,10 +72,6 @@ class MenuMixin(object):
         """Returns menu items strictly sorted in ascending order by parent and position."""
         return self.items
 
-    def get_program_name(self):
-        """Returns a unique menu name to display on the page."""
-        return self.program_name
-
-    def get_title(self):
-        """Returns the title of the menu."""
-        return self.title
+    # def get_program_name(self):
+    #     """Returns a unique menu name to display on the page."""
+    #     return self.program_name

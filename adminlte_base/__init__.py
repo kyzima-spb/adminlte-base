@@ -41,20 +41,21 @@ class MenuLoader(metaclass=ABCMeta):
         menu = Menu()
         items = sorted(
             data.get_items(),
-            key=lambda v: (v.get_parent_id() or 0, v.get_pos(), v.get_id())
+            key=lambda v: (v.get_parent_id() or 0, v.get_pos(), v.get_link().get_id())
         )
 
         for i in items:
+            link = i.get_link()
             menu.add_item(MenuItem(
-                id_item=i.get_id(),
-                title=i.get_title(),
-                url=i.get_url() or self.manager.create_url(
-                    i.get_endpoint(), *i.get_endpoint_args(), **i.get_endpoint_kwargs()
+                id_item=link.get_id(),
+                title=link.get_title(),
+                url=link.get_url() or self.manager.create_url(
+                    link.get_endpoint(), *link.get_endpoint_args(), **link.get_endpoint_kwargs()
                 ),
                 parent=menu.get_item(i.get_parent_id()),
-                item_type=i.get_type(),
-                icon=i.get_icon(),
-                help=i.get_hint()
+                item_type=link.get_type(),
+                icon=link.get_icon(),
+                help=link.get_hint()
             ))
 
         if active_path is not None:
