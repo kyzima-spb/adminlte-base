@@ -23,7 +23,7 @@ class MenuLinkMixin(mixins.MenuLinkMixin):
     endpoint_kwargs = Column(Text, default='', nullable=False)
     # endpoint_args = Column(JSON, default=(), nullable=False)
     # endpoint_kwargs = Column(JSON, default={}, nullable=False)
-    url = Column(Text, default='', nullable=False)
+    url = Column(Text, default='#', nullable=False)
     icon = Column(String(50), default='', nullable=False)
     help = Column(String(500), default='', nullable=False)
 
@@ -32,6 +32,7 @@ class MenuMixin(mixins.MenuMixin):
     __tablename__ = 'menu'
 
     id = Column(Integer, primary_key=True)
+    title = Column(String(500), nullable=False)
 
     @declared_attr
     def items(cls):

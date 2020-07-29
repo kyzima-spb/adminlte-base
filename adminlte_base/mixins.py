@@ -75,3 +75,7 @@ class MenuMixin(object):
     # def get_program_name(self):
     #     """Returns a unique menu name to display on the page."""
     #     return self.program_name
+
+    def get_title(self):
+        """Returns the title of the menu."""
+        return self.title
