@@ -68,6 +68,10 @@ class MenuItemMixin(object):
 class MenuMixin(object):
     """Mixin for the database model that describes the menu."""
 
+    def get_id(self):
+        """Returns a unique identifier for a menu."""
+        return self.id
+
     def get_items(self):
         """Returns menu items strictly sorted in ascending order by parent and position."""
         return self.items

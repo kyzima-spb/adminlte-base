@@ -231,3 +231,17 @@
     {% endfor %}
   </ul>
 {%- endmacro %}
+
+
+{% macro tree(items, url_base='') -%}
+  <ul>
+    {% for item in items %}
+      <li>
+        <a href="{{ url_base }}/{{ item.id }}">{{ item }}</a>
+        {% if item is iterable and item is not string %}
+          {{ tree(item, url_base) }}
+        {% endif %}
+      </li>
+    {% endfor%}
+  </ul>
+{%- endmacro %}

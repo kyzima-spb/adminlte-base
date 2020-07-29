@@ -181,6 +181,13 @@ class MenuItem(object):
         self.help = help
         self.badge = badge
 
+    def __str__(self):
+        return self.title
+
+    def __iter__(self):
+        for child in self.children:
+            yield child
+
     def add_badge(self, text, color):
         """Adds a text label to a menu item."""
         self.badge = (text, color)

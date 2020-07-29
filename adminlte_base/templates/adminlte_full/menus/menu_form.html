@@ -1,0 +1,20 @@
+<form method="post"{% if action %} action="{{ action }}"{% endif %}>
+  {% call widgets.render_card(title,
+                              color=color|default(ThemeColor.PRIMARY),
+                              outline=true,
+                              collapsable=true, expandable=expandable, maximizable=true)
+  %}
+    <div class="card-body">
+      {{ bootstrap.form_fields(form, placeholder=true) }}
+    </div>
+    <div class="card-footer">
+      <input class="btn btn-primary" type="submit" name="action" value="{{ _('Save') }}">
+      {% if save_and_edit %}
+        <input class="btn btn-success" type="submit" name="action" value="{{ _('Save and Edit') }}">
+      {% endif %}
+      {% if cancel %}
+        <a class="btn btn-secondary float-right" href="{{ cancel }}">{{ _('Cancel') }}</a>
+      {% endif %}
+    </div>
+  {% endcall %}
+</form>

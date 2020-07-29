@@ -46,12 +46,18 @@ class MenuLoader(metaclass=ABCMeta):
 
         for i in items:
             link = i.get_link()
+
+            if link.get_endpoint():
+                url = self.manager.create_url(
+                    link.get_endpoint(), *link.get_endpoint_args(), **link.get_endpoint_kwargs()
+                )
+            else:
+                url = link.get_url()
+
             menu.add_item(MenuItem(
                 id_item=link.get_id(),
                 title=link.get_title(),
-                url=link.get_url() or self.manager.create_url(
-                    link.get_endpoint(), *link.get_endpoint_args(), **link.get_endpoint_kwargs()
-                ),
+                url=url,
                 parent=menu.get_item(i.get_parent_id()),
                 item_type=link.get_type(),
                 icon=link.get_icon(),

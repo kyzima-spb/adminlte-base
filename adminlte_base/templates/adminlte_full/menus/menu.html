@@ -1,0 +1,38 @@
+{% extends 'adminlte_full/base.html' %}
+{% import "adminlte_full/macros/widgets.html" as widgets %}
+{% import 'adminlte_full/macros/markup.html' as adminlte_markup with context %}
+
+{% block head %}
+  {{ super() }}
+  <base href="{{ adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT) }}{{ menu.id }}/">
+{% endblock %}
+
+{% block page_title %}{{ menu }}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ super() }}
+  {{ bootstrap.breadcrumb(title=_('Menu Dashboard'), url=adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT)) }}
+  {{ bootstrap.breadcrumb(title=menu, is_active=true) }}
+{% endblock %}
+
+{% block page_content %}
+  <div class="row">
+    <div class="col-md-6">
+      {% set items = adminlte.menu._create(menu) %}
+      {{ widgets.render_card(
+           title='Menu', color=ThemeColor.PRIMARY, outline=true,
+           body=adminlte_markup.tree(items, 'items')
+         )
+      }}
+    </div>
+    <div class="col-md-6">
+      {% with title=_('Edit menu'), color=ThemeColor.SUCCESS, expandable=true, form=menu_form %}
+        {% include 'adminlte_full/menus/menu_form.html' %}
+      {% endwith %}
+
+      {% with title=_('Add a new item to the menu'), color=ThemeColor.SUCCESS, form=menu_item_form, action='items' %}
+        {% include 'adminlte_full/menus/menu_form.html' %}
+      {% endwith %}
+    </div>
+  </div>
+{% endblock %}

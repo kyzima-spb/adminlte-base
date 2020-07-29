@@ -36,7 +36,7 @@ class MenuMixin(mixins.MenuMixin):
 
     @declared_attr
     def items(cls):
-        return relationship('MenuItem')
+        return relationship('MenuItem', backref='menu')
 
 
 class MenuItemMixin(mixins.MenuItemMixin):

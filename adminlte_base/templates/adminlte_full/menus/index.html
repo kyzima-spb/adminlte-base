@@ -1,0 +1,113 @@
+{% extends 'adminlte_full/base.html' %}
+{% import "adminlte_full/macros/widgets.html" as widgets %}
+
+{% block head %}
+  {{ super() }}
+  <base href="{{ adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT) }}">
+{% endblock %}
+
+{% block page_title %}{{ _('Menu Dashboard') }}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ super() }}
+  {{ bootstrap.breadcrumb(title=_('Menu Dashboard'), is_active=true) }}
+{% endblock %}
+
+{% block page_content %}
+  <div class="row">
+    <div class="col-6">
+      {% call widgets.render_card(_('All application menus'),
+                                  color=ThemeColor.PRIMARY, outline=true,
+                                  collapsable=true, maximizable=true)
+      %}
+        <div class="card-body">
+          {% call(row) widgets.render_table(all_menus, [_('Title')],
+                                            auto_number=true,
+                                            table_id='menu_grid',
+                                            table_class='table-striped table-hover')
+          %}
+            <td><a href="{{ row.id }}">{{ row }}</a></td>
+          {% endcall %}
+        </div>
+      {% endcall %}
+    </div>
+    <div class="col-md-6">
+      {% with title=_('Create menu'), color=ThemeColor.SUCCESS, save_and_edit=true %}
+        {% include 'adminlte_full/menus/menu_form.html' %}
+      {% endwith %}
+    </div>
+  </div>
+
+  <h4 class="mb-2 mt-4">{{ _('Links') }}</h4>
+  <div class="row">
+    <div class="col-12">
+      {% call widgets.render_card(_('All links used in all menus'),
+                                  color=ThemeColor.PRIMARY, outline=true,
+                                  collapsable=true, maximizable=true)
+      %}
+        <div class="card-body">
+          {{ widgets.render_data_table
+             (
+               auto_number=true,
+               table_id='menu_links_grid',
+               table_class='table-striped table-hover',
+               headers=['Title', 'Type', 'Endpoint', 'Url'],
+               footer=true
+             )
+          }}
+        </div>
+      {% endcall %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  {% assets 'datatables_css' %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+  {% endassets %}
+{% endblock %}
+
+{% block javascript %}
+  {{ super() }}
+  {% assets 'datatables_js' %}
+    <script src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+{% endblock %}
+
+{% block javascript_inline %}
+  $(() => {
+    $("#menu_grid").DataTable({
+      responsive: true,
+      searching: false,
+      lengthChange: false,
+      autoWidth: true
+    });
+
+    let grid = $("#menu_links_grid").DataTable({
+      responsive: true,
+      ajax: "links",
+      columns: [
+        { "data": "id" },
+        {
+            data: "title",
+            render: (data, type, row) => {
+                return type === 'display' ? `<a href="links/${row.id}">${data}</a>` : data;
+            }
+        },
+        { "data": "type" },
+        { "data": "endpoint" },
+        { "data": "url" },
+      ],
+      /*buttons: [
+        {
+          text: 'Edit',
+          action: function ( e, dt, node, config ) {
+            console.log( e );
+          }
+        }
+      ]*/
+    });
+
+  });
+{% endblock %}
