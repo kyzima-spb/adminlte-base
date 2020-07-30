@@ -1,0 +1,48 @@
+<form method="post">
+  <div class="row">
+    <div class="col-md-6">
+      {% call widgets.render_card(title='General', color=ThemeColor.PRIMARY, outline=true) %}
+        <div class="card-body">
+          <div class="form-group">
+            {{ form.type.label }}
+            <div>
+              {% for item in form.type %}
+                <div class="form-check form-check-inline">
+                  {{ item(class='form-check-input') }}
+                  {{ item.label(class='form-check-label') }}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          {{ bootstrap.form_fields(form, placeholder=true, only=['title', 'icon', 'help']) }}
+        </div>
+      {% endcall %}
+    </div>
+    <div class="col-md-6">
+      {% call widgets.render_card('Routing', color=ThemeColor.SECONDARY, outline=true) %}
+        <div class="card-body">
+          {% if form.endpoint %}
+            {{ bootstrap.form_field(form.endpoint) }}
+          {% endif %}
+          {% if form.endpoint_args %}
+            {{ bootstrap.form_field(form.endpoint_args, placeholder=true) }}
+          {% endif %}
+          {% if form.endpoint_kwargs %}
+            {{ bootstrap.form_field(form.endpoint_kwargs, placeholder=true) }}
+          {% endif %}
+          {% if form.url %}
+            {{ bootstrap.form_field(form.url, placeholder=true) }}
+          {% endif %}
+        </div>
+      {% endcall %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <input class="btn btn-primary" type="submit" name="action" value="{{ adminlte.gettext('Save and Create') }}">
+      <input class="btn btn-primary" type="submit" name="action" value="{{ adminlte.gettext('Save and Close') }}">
+      <input class="btn btn-success" type="submit" name="action" value="{{ adminlte.gettext('Save') }}">
+      <a class="btn btn-secondary float-right" href="../">{{ adminlte.gettext('Cancel') }}</a>
+    </div>
+  </div>
+</form>

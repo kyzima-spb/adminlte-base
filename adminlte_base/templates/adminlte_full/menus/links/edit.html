@@ -1,0 +1,23 @@
+{% extends 'adminlte_full/base.html' %}
+{% import "adminlte_full/macros/widgets.html" as widgets %}
+
+{% block head %}
+  {{ super() }}
+  <base href="{{ adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT) }}/links">
+{% endblock %}
+
+{% block page_title %}{{ adminlte.gettext('Edit link') }}{% endblock %}
+
+{% block breadcrumbs %}
+  {{ super() }}
+  {{ bootstrap.breadcrumb(title=adminlte.gettext('Menu Dashboard'), url=adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT)) }}
+  {{ bootstrap.breadcrumb(title=adminlte.gettext('Edit link'), is_active=true) }}
+{% endblock %}
+
+{% block page_content %}
+  <div class="row">
+    <div class="col-12">
+      {% include 'adminlte_full/menus/links/form.html' %}
+    </div>
+  </div>
+{% endblock %}
