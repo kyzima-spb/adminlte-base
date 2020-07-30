@@ -11,7 +11,7 @@
 
 {% block breadcrumbs %}
   {{ super() }}
-  {{ bootstrap.breadcrumb(title=_('Menu Dashboard'), url=adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT)) }}
+  {{ bootstrap.breadcrumb(title=adminlte.gettext('Menu Dashboard'), url=adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT)) }}
   {{ bootstrap.breadcrumb(title=menu, is_active=true) }}
 {% endblock %}
 
@@ -26,11 +26,11 @@
       }}
     </div>
     <div class="col-md-6">
-      {% with title=_('Edit menu'), color=ThemeColor.SUCCESS, expandable=true, form=menu_form %}
+      {% with title=adminlte.gettext('Edit menu'), color=ThemeColor.SUCCESS, expandable=true, form=menu_form %}
         {% include 'adminlte_full/menus/menu_form.html' %}
       {% endwith %}
 
-      {% with title=_('Add a new item to the menu'), color=ThemeColor.SUCCESS, form=menu_item_form, action='items' %}
+      {% with title=adminlte.gettext('Add a new item to the menu'), color=ThemeColor.SUCCESS, form=menu_item_form, action='items' %}
         {% include 'adminlte_full/menus/menu_form.html' %}
       {% endwith %}
     </div>

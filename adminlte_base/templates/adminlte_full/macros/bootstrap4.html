@@ -16,7 +16,7 @@
   {% endfor %}
 {% endmacro %}
 
-{% macro form_field(field, form_group_class='form-group', placeholder='', show_label=true,
+{% macro form_field(field, form_group_class='form-group', placeholder=false, show_label=true,
                addon_before=none, addon_after=none) %}
   <div class="{{ form_group_class }}">
     {% if show_label %}
@@ -37,6 +37,10 @@
       <div class="input-group-prepend">
         <div class="input-group-text">{{ addon_before|safe }}</div>
       </div>
+    {% endif %}
+
+    {% if placeholder is true %}
+      {% set placeholder = field.label.text %}
     {% endif %}
 
     {{ field(class="form-control " + valid_class, placeholder=placeholder) }}

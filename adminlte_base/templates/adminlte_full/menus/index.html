@@ -6,22 +6,22 @@
   <base href="{{ adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT) }}">
 {% endblock %}
 
-{% block page_title %}{{ _('Menu Dashboard') }}{% endblock %}
+{% block page_title %}{{ adminlte.gettext('Menu Dashboard') }}{% endblock %}
 
 {% block breadcrumbs %}
   {{ super() }}
-  {{ bootstrap.breadcrumb(title=_('Menu Dashboard'), is_active=true) }}
+  {{ bootstrap.breadcrumb(title=adminlte.gettext('Menu Dashboard'), is_active=true) }}
 {% endblock %}
 
 {% block page_content %}
   <div class="row">
     <div class="col-6">
-      {% call widgets.render_card(_('All application menus'),
+      {% call widgets.render_card(adminlte.gettext('All application menus'),
                                   color=ThemeColor.PRIMARY, outline=true,
                                   collapsable=true, maximizable=true)
       %}
         <div class="card-body">
-          {% call(row) widgets.render_table(all_menus, [_('Title')],
+          {% call(row) widgets.render_table(all_menus, [adminlte.gettext('Title')],
                                             auto_number=true,
                                             table_id='menu_grid',
                                             table_class='table-striped table-hover')
@@ -32,16 +32,16 @@
       {% endcall %}
     </div>
     <div class="col-md-6">
-      {% with title=_('Create menu'), color=ThemeColor.SUCCESS, save_and_edit=true %}
+      {% with title=adminlte.gettext('Create menu'), color=ThemeColor.SUCCESS, save_and_edit=true %}
         {% include 'adminlte_full/menus/menu_form.html' %}
       {% endwith %}
     </div>
   </div>
 
-  <h4 class="mb-2 mt-4">{{ _('Links') }}</h4>
+  <h4 class="mb-2 mt-4">{{ adminlte.gettext('Links') }}</h4>
   <div class="row">
     <div class="col-12">
-      {% call widgets.render_card(_('All links used in all menus'),
+      {% call widgets.render_card(adminlte.gettext('All links used in all menus'),
                                   color=ThemeColor.PRIMARY, outline=true,
                                   collapsable=true, maximizable=true)
       %}

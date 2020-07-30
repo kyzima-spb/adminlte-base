@@ -8,12 +8,12 @@
       {{ bootstrap.form_fields(form, placeholder=true) }}
     </div>
     <div class="card-footer">
-      <input class="btn btn-primary" type="submit" name="action" value="{{ _('Save') }}">
+      <input class="btn btn-primary" type="submit" name="action" value="{{ adminlte.gettext('Save') }}">
       {% if save_and_edit %}
-        <input class="btn btn-success" type="submit" name="action" value="{{ _('Save and Edit') }}">
+        <input class="btn btn-success" type="submit" name="action" value="{{ adminlte.gettext('Save and Edit') }}">
       {% endif %}
       {% if cancel %}
-        <a class="btn btn-secondary float-right" href="{{ cancel }}">{{ _('Cancel') }}</a>
+        <a class="btn btn-secondary float-right" href="{{ cancel }}">{{ adminlte.gettext('Cancel') }}</a>
       {% endif %}
     </div>
   {% endcall %}

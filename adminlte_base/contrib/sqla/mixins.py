@@ -1,9 +1,8 @@
+from adminlte_base.data_types import MenuItem
+from adminlte_base import mixins
 from sqlalchemy import Column, String, Text, Integer, JSON, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declared_attr
-
-from ..data_types import MenuItem
-from .. import mixins
 
 
 __all__ = (

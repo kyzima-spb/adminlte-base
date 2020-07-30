@@ -6,19 +6,19 @@
   <base href="{{ adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT) }}">
 {% endblock %}
 
-{% block page_title %}{{ _('Edit item') }}{% endblock %}
+{% block page_title %}{{ adminlte.gettext('Edit item') }}{% endblock %}
 
 {% block breadcrumbs %}
   {{ super() }}
-  {{ bootstrap.breadcrumb(title=_('Menu Dashboard'), url=adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT)) }}
+  {{ bootstrap.breadcrumb(title=adminlte.gettext('Menu Dashboard'), url=adminlte.create_url(config.ADMINLTE_MENU_ROOT_ENDPOINT)) }}
   {{ bootstrap.breadcrumb(title=menu, url=menu.id) }}
-  {{ bootstrap.breadcrumb(title=_('Edit item'), is_active=true) }}
+  {{ bootstrap.breadcrumb(title=adminlte.gettext('Edit item'), is_active=true) }}
 {% endblock %}
 
 {% block page_content %}
   <div class="row">
     <div class="col-12">
-      {% with title=_('Edit item'), cancel=menu.id %}
+      {% with title=adminlte.gettext('Edit item'), cancel=menu.id %}
         {% include 'adminlte_full/menus/menu_form.html' %}
       {% endwith %}
     </div>
