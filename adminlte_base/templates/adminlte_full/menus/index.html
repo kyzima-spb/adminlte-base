@@ -46,6 +46,7 @@
                                   collapsable=true, maximizable=true)
       %}
         <div class="card-body">
+          <a class="btn btn-primary float-left" href="./links/create">{{ adminlte.gettext('Create link') }}</a>
           {{ widgets.render_data_table
              (
                auto_number=true,
@@ -81,12 +82,12 @@
       responsive: true,
       searching: false,
       lengthChange: false,
-      autoWidth: true
     });
 
     let grid = $("#menu_links_grid").DataTable({
       responsive: true,
       ajax: "links",
+      lengthChange: false,
       columns: [
         { "data": "id" },
         {
