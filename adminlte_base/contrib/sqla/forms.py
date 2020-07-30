@@ -12,6 +12,7 @@ def menu_item_form_factory(query_factory, form_class=Form):
             query_factory=query_factory,
             get_label='title',
             allow_blank=True,
+            blank_text='-',
             validators=[
             ]
         )
@@ -26,6 +27,7 @@ def menu_item_form_factory(query_factory, form_class=Form):
             query_factory=query_factory,
             get_label='title',
             allow_blank=True,
+            blank_text='-',
             validators=[
             ]
         )

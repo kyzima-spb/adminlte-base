@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="{{ adminlte.static('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ adminlte.static('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
   {% endblock styles %}
   <style>{% block styles_inline %}{% endblock styles_inline %}</style>
   {% block javascript_head %}{% endblock javascript_head %}
@@ -32,7 +34,15 @@
     <script src="{{ adminlte.static('plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ adminlte.static('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ adminlte.static('dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ adminlte.static('plugins/select2/js/select2.full.min.js') }}"></script>
   {% endblock %}
+  <script>
+      $(() => {
+          $('select').select2({
+              theme: 'bootstrap4'
+          });
+      });
+  </script>
   <script>{% block javascript_inline %}{% endblock %}</script>
 {% endblock %}
 </body>
