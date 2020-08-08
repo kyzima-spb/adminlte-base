@@ -59,7 +59,7 @@ class MenuLinkForm(Form):
     )
     url = StringField(
         label='URL',
-        filters=[trim, lambda v: v is not None and v.strip('#')],
+        filters=[trim, lambda v: v and v.strip('#')],
         validators=[vd.Optional(), vd.URL(message='Only absolute URLs are allowed.')],
         description='Only absolute URLs are allowed.'
     )

@@ -35,11 +35,16 @@
     <script src="{{ adminlte.static('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ adminlte.static('dist/js/adminlte.min.js') }}"></script>
     <script src="{{ adminlte.static('plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ adminlte.static('plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
   {% endblock %}
   <script>
       $(() => {
           $('select').select2({
               theme: 'bootstrap4'
+          });
+
+          $('input[data-bootstrap-switch]').each((i, checkbox) => {
+            $(checkbox).bootstrapSwitch('state', $(checkbox).prop('checked'));
           });
       });
   </script>

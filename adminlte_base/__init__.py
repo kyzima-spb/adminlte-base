@@ -48,9 +48,12 @@ class MenuLoader(metaclass=ABCMeta):
             link = i.get_link()
 
             if link.get_endpoint():
-                url = self.manager.create_url(
-                    link.get_endpoint(), *link.get_endpoint_args(), **link.get_endpoint_kwargs()
-                )
+                try:
+                    url = self.manager.create_url(
+                        link.get_endpoint(), *link.get_endpoint_args(), **link.get_endpoint_kwargs()
+                    )
+                except:
+                    url = '#'
             else:
                 url = link.get_url()
 
