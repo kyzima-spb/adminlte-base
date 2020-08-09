@@ -4,9 +4,13 @@
       <img src="{{ user.email | gravatar }}" class="img-circle elevation-2" alt="User Image">
     </div>
     <div class="info">
-      <a href="{{ adminlte.create_url(config.ADMINLTE_PROFILE_ENDPOINT) }}" class="d-block">
-        {{ user.get_full_name() }}
-      </a>
+      {% if config.ADMINLTE_PROFILE_ENDPOINT %}
+        <a href="{{ adminlte.create_url(config.ADMINLTE_PROFILE_ENDPOINT) }}" class="d-block">
+          {{ user.get_full_name() }}
+        </a>
+      {% else %}
+        <a class="d-block">{{ user.get_full_name() }}</a>
+      {% endif %}
     </div>
   </div>
 {% endif %}

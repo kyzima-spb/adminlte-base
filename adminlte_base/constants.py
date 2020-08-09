@@ -106,14 +106,15 @@ DEFAULT_SETTINGS = {
     'ADMINLTE_TASKS_ENABLED': False,
 
     'ADMINLTE_CHANGE_LANGUAGE_ENDPOINT': 'change_language',
-    'ADMINLTE_PROFILE_ENDPOINT': 'profile',
+    'ADMINLTE_PROFILE_ENDPOINT': None,
     'ADMINLTE_MENU_ROOT_ENDPOINT': 'adminlte_full_menus.index',
     'ADMINLTE_SEARCH_ENDPOINT': 'search',
     'ADMINLTE_TERMS_ENDPOINT': None,
     'ADMINLTE_REGISTRATION_ENDPOINT': 'auth.registration',
     'ADMINLTE_LOGIN_ENDPOINT': 'auth.login',
     'ADMINLTE_LOGOUT_ENDPOINT': 'auth.logout',
-    'ADMINLTE_CHANGE_PASSWORD_ENDPOINT': 'auth.change_password',
+    # 'ADMINLTE_CHANGE_PASSWORD_ENDPOINT': 'auth.change_password',
+    'ADMINLTE_CHANGE_PASSWORD_ENDPOINT': None,
     'ADMINLTE_PASSWORD_RESET_ENDPOINT': 'auth.reset_password',
     'ADMINLTE_PASSWORD_RECOVER_ENDPOINT': 'auth.recover_password',
 }
