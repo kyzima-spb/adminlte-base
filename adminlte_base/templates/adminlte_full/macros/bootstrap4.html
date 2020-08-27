@@ -43,7 +43,14 @@
       {% set placeholder = field.label.text %}
     {% endif %}
 
-    {{ field(class="form-control " + valid_class, placeholder=placeholder) }}
+    {% if field.widget.input_type == 'file' %}
+      <div class="custom-file">
+        {{ field(class="custom-file-input " + valid_class) }}
+        <label class="custom-file-label" for="{{ field.id }}">Choose file</label>
+      </div>
+    {% else %}
+      {{ field(class="form-control " + valid_class, placeholder=placeholder) }}
+    {% endif %}
 
     {% if field.description %}
       {% if field.description is iterable and field.description is not string %}
